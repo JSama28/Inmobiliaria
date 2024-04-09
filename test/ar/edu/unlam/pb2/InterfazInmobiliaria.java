@@ -16,11 +16,11 @@ public class InterfazInmobiliaria {
 			System.out.println("3.   Agregar clientes ");
 			System.out.println("4.   Obtener listado de propiedades ordenado por precio ");
 			System.out.println("5.   Obtener listado de propiedades ordenado por ubicacion ");
-			System.out.println("6.a. Buscar propiedades por rango de precio ");
-			System.out.println("6.b. Buscar propiedades por ubicacion ");
-			System.out.println("7.   Realizar la venta de una propiedad ");
-			System.out.println("8.   Realizar el alquiler de una propiedad ");
-			System.out.println("9.   Salir");
+			System.out.println("6.   Buscar propiedades por rango de precio ");
+			System.out.println("7.   Buscar propiedades por ubicacion ");
+			System.out.println("8.   Realizar la venta de una propiedad ");
+			System.out.println("9.   Realizar el alquiler de una propiedad ");
+			System.out.println("10.   Salir");
 			
 			System.out.println("\nIngrese la opcion deseada: ");
 			opcionSeleccionada = teclado.nextInt();
@@ -65,8 +65,19 @@ public class InterfazInmobiliaria {
 				inmobiliariaActual.obtenerListadoPorUbicacion();
 				break;
 			case BUSCAR_PROPIEDADES_POR_PRECIO:
+				System.out.println("\nIngrese precio minimo: ");
+				Double precioMin = teclado.nextDouble();
+				
+				System.out.println("\nIngrese precio maximo: ");
+				Double precioMax = teclado.nextDouble();
+				
+				inmobiliariaActual.buscarPropiedadesPorPrecio(precioMin, precioMax);
 				break;
 			case BUSCAR_PROPIEDADES_POR_UBICACION:
+				System.out.println("\nIngresar ubicacion deseada: ");
+				String ubicacion = teclado.next();
+				
+				inmobiliariaActual.buscarPropiedadesPorUbicacion(ubicacion);
 				break;
 			case REALIZAR_VENTA:
 				break;
@@ -77,9 +88,7 @@ public class InterfazInmobiliaria {
 				break;
 			}
 			
-			
-			
-		} while(opcionSeleccionada!=9);
+		} while(opcionSeleccionada!=10);
 		
 		teclado.close();
 	} 

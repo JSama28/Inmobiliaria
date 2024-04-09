@@ -26,8 +26,42 @@ public class Inmobiliaria {
 
 		this.propiedades[0] = new Propiedad("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.ALQUILER);
 		this.propiedades[1] = new Propiedad("monteagudo", 254, "temos", 2.5, true, TipoDeOperacion.VENTA);
+		this.propiedades[2] = new Propiedad("escalada", 3254, "pozos", 1.5, true, TipoDeOperacion.VENTA);
+		this.propiedades[3] = new Propiedad("suipacha", 1554, "atres", 7.5, true, TipoDeOperacion.ALQUILER);
+	}
+	
+	public String getNombre() {
+		return nombre;
 	}
 
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String geteMail() {
+		return eMail;
+	}
+
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	
 	public Boolean agregarPropiedad(Propiedad nuevaPropiedad){
 		for(int i=0; i<cantidadMaximaDePropiedades; i++) {
 			if(propiedades[i]==null) {
@@ -217,39 +251,47 @@ public class Inmobiliaria {
 		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");	
 	}
 
+	public void buscarPropiedadesPorPrecio(Double precioMin, Double precioMax) {
+		Propiedad[] propEntrePrecio = new Propiedad[cantidadMaximaDePropiedades];
+		Integer cantidadAgregada = 0;
+
+		for(int i = 0; i < getCantidadDePropiedades(); i++) {
+			System.out.println(propiedades[i].getPrecio());
+			
+			if(propiedades[i].getPrecio() >= precioMin && propiedades[i].getPrecio() <= precioMax) {
+				propEntrePrecio[cantidadAgregada] = propiedades[i];
+				cantidadAgregada++;
+			}
+		}
+		
+		System.out.println("\nPROPIEDADES DENTRO DEL RANGO DE PRECIO: " + cantidadAgregada);
+		
+		for(int j = 0; j < cantidadAgregada; j++) {
+			String descripcionPropiedad = propEntrePrecio[j].toString();
+			System.out.println(descripcionPropiedad);
+		}
+	}
 	
-	public String getNombre() {
-		return nombre;
-	}
+	public void buscarPropiedadesPorUbicacion(String ubicacionBuscada) {
+		Propiedad[] propEnUbicacion = new Propiedad[cantidadMaximaDePropiedades];
+		Integer cantidadAgregada = 0;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		for(int i = 0; i < getCantidadDePropiedades(); i++) {
+			System.out.println(propiedades[i].getPrecio());
+			
+			if(propiedades[i].getCiudad().equals(ubicacionBuscada)) {
+				propEnUbicacion[cantidadAgregada] = propiedades[i];
+				cantidadAgregada++;
+			}
+		}
+		
+		System.out.println("\nPROPIEDADES DENTRO DE LA UBICACION DESEADA: " + cantidadAgregada);
+		
+		for(int j = 0; j < cantidadAgregada; j++) {
+			String descripcionPropiedad = propEnUbicacion[j].toString();
+			System.out.println(descripcionPropiedad);
+		}
 	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String geteMail() {
-		return eMail;
-	}
-
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
 
 
 }
