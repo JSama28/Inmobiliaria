@@ -10,6 +10,10 @@ public class Inmobiliaria {
 	private String direccion;
 	private String eMail;
 	private String telefono;
+	private Casa casa[];
+	private Departamento departamento[];
+	private Ph ph[];
+	private Terreno terreno[];
 	private Propiedad propiedades[];
 	private Cliente clientes[];
 	private final Integer cantidadMaximaDePropiedades = 100;
@@ -21,6 +25,9 @@ public class Inmobiliaria {
 		this.direccion = direccion;
 		this.eMail = eMail;
 		this.telefono = telefono;
+		this.casa = new Casa[cantidadMaximaDePropiedades];
+		this.departamento = new Departamento[cantidadMaximaDePropiedades];
+		this.ph = new Ph[cantidadMaximaDePropiedades];
 		this.propiedades = new Propiedad[cantidadMaximaDePropiedades];
 		this.clientes = new Cliente[cantidadMaximaDeClientes];
 
@@ -81,7 +88,7 @@ public class Inmobiliaria {
 		}
 		return false;
 	}
-
+// CORREGIR PROPIEDAD,CASA,PH,DEPT,CAMPO
 	public Propiedad crearPropiedad() {
 		Scanner teclado = new Scanner(System.in);
 
@@ -110,6 +117,9 @@ public class Inmobiliaria {
 				tipoValido = true;
 			} else if(tipoOperacion.equals("alquiler")) {
 				tipo = TipoDeOperacion.ALQUILER;
+				tipoValido = true;
+			} else if(tipoOperacion.equals("permuta")) {
+				tipo = TipoDeOperacion.PERMUTA;
 				tipoValido = true;
 			} else {
 				System.out.println("Tipo invalido");
