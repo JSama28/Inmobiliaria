@@ -27,43 +27,42 @@ public class InterfazInmobiliaria {
 
 			switch(OpcionDeMenu.values()[opcionSeleccionada -1]) {
 			case AGREGAR_PROPIEDAD:
-				Propiedad prop = inmobiliariaActual.crearPropiedad();
-				inmobiliariaActual.agregarPropiedad(prop);
-				
-				System.out.println("SE AGREGO PROPIEDAD.");
+				inmobiliariaActual.agregarPropiedad();
 				break;
 				
 			case MODIFICAR_PROPIEDAD:
 				Boolean propiedadEncontrada = false;
 				
 				while(propiedadEncontrada == false) {
-					System.out.println("Ingrese calle de propiedad a modificar: ");
-					String calle = teclado.next();
-					System.out.println("Ingrese numero de propiedad a modificar: ");
-					Integer numeroAModif = teclado.nextInt();
+					System.out.println("Ingrese id de la propiedad a modificar: ");
+					String idPropiedad = teclado.next();
 					
-					propiedadEncontrada = inmobiliariaActual.editarPropiedad(calle, numeroAModif);
+					propiedadEncontrada = inmobiliariaActual.editarPropiedad(idPropiedad);
+					
 					
 					if(propiedadEncontrada == false) {
 						System.out.println("NO SE ENCONTRO PROPIEDAD\n");
 					} else {
 						System.out.println("SE EDITO PROPIEDAD.\n");
 					}
-				}
-				
+				}	
 				break;
+				
 			case AGREGAR_CLIENTE:
 				Cliente cliente = inmobiliariaActual.crearCliente();
 				inmobiliariaActual.agregarCliente(cliente);
 				
 				System.out.println("CLIENTE AGREGADO EXITOSAMENTE.");
 				break;
+				
 			case OBTENER_LISTADO_POR_PRECIO:
 				inmobiliariaActual.obtenerListadoPorPrecio();
 				break;
+				
 			case OBTENER_LISTADO_POR_UBICACION:
 				inmobiliariaActual.obtenerListadoPorUbicacion();
 				break;
+				
 			case BUSCAR_PROPIEDADES_POR_PRECIO:
 				System.out.println("\nIngrese precio minimo: ");
 				Double precioMin = teclado.nextDouble();
@@ -73,16 +72,20 @@ public class InterfazInmobiliaria {
 				
 				inmobiliariaActual.buscarPropiedadesPorPrecio(precioMin, precioMax);
 				break;
+				
 			case BUSCAR_PROPIEDADES_POR_UBICACION:
 				System.out.println("\nIngresar ubicacion deseada: ");
 				String ubicacion = teclado.next();
 				
 				inmobiliariaActual.buscarPropiedadesPorUbicacion(ubicacion);
 				break;
+				
 			case REALIZAR_VENTA:
 				break;
+				
 			case REALIZAR_ALQUILER:
 				break;
+				
 			case SALIR:
 				System.out.println("Adios.");
 				break;

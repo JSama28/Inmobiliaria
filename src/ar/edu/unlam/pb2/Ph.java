@@ -4,7 +4,7 @@ public class Ph {
 
 	private String calle;
 	private Integer numero;
-	private Integer numPh;
+	private String numPh;
 	private String ciudad;
 	private Double precio;
 	private Boolean estaDisponible;
@@ -13,7 +13,7 @@ public class Ph {
 	private String idPh;
 	
 	
-	public Ph(String calle, Integer numero, Integer numPh, String ciudad, Double precio, Boolean estaDisponible,
+	public Ph(String calle, Integer numero, String numPh, String ciudad, Double precio, Boolean estaDisponible,
 			TipoDeOperacion tipo, Propietario propietario, String idPh) {
 		
 		this.calle = calle;
@@ -56,12 +56,12 @@ public class Ph {
 	}
 
 
-	public Integer getNumPh() {
+	public String getNumPh() {
 		return numPh;
 	}
 
 
-	public void setNumPh(Integer numPh) {
+	public void setNumPh(String numPh) {
 		this.numPh = numPh;
 	}
 
@@ -118,8 +118,9 @@ public class Ph {
 	
 	@Override
 	public String toString() {
-		return "Calle: " + calle + " " + numero + ", NroPh: " + numPh + ", Ciudad: " + ciudad + ", Precio: " + precio + ", " 
-	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + " Propietario: " + propietario;
+		return "Id: " + idPh + ", Calle: " + calle + " " + numero + ", NroPh: " + numPh + ", Ciudad: " + ciudad + ", Precio: " + precio + ", " 
+	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + propietario.getApellido();
+	
 	}
 	
 	

@@ -9,9 +9,10 @@ public class Casa {
 	private Boolean estaDisponible;
 	private TipoDeOperacion tipo;
 	private Propietario propietario;
+	private String idCasa;
 	
 	public Casa(String calle, Integer numero, String ciudad, Double precio, Boolean estaDisponible,
-			TipoDeOperacion tipo, Propietario propietario) {
+			TipoDeOperacion tipo, Propietario propietario, String idCasa) {
 		
 		this.calle = calle;
 		this.numero = numero;
@@ -20,6 +21,7 @@ public class Casa {
 		this.estaDisponible = estaDisponible;
 		this.tipo = tipo;
 		this.propietario = propietario;
+		this.idCasa = idCasa;
 	}
 
 	public String getCalle() {
@@ -78,10 +80,19 @@ public class Casa {
 		this.propietario = propietario;
 	}
 	
+	
+	public String getIdCasa() {
+		return idCasa;
+	}
+
+	public void setIdCasa(String idCasa) {
+		this.idCasa = idCasa;
+	}
+
 	@Override
 	public String toString() {
-		return "Calle: " + calle + " " + numero + ", " + ciudad + ", precio: " + precio + ", " 
-	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + " " + propietario;
+		return "Id: " + idCasa +", Calle: " + calle + " " + numero + ", " + ciudad + ", precio: " + precio + ", " 
+	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + propietario.getApellido();
 	}
 	
 }

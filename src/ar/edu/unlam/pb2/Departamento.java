@@ -4,9 +4,7 @@ public class Departamento {
 
 	private String calle;
 	private Integer numero;
-	private Integer numDep;
-	private String siglaDep;
-	private String torre;
+	private String numDep;
 	private String ciudad;
 	private Double precio;
 	private Boolean estaDisponible;
@@ -15,14 +13,12 @@ public class Departamento {
 	private String idDep;
 	
 	
-	public Departamento(String calle, Integer numero, Integer numDep, String siglaDep, String torre,
-			String ciudad, Double precio, Boolean estaDisponible, TipoDeOperacion tipo, Propietario propietario, String idDep) {
+	public Departamento(String calle, Integer numero, String numDep, String ciudad, Double precio, Boolean estaDisponible, 
+			TipoDeOperacion tipo, Propietario propietario, String idDep) {
 		
 		this.calle = calle;
 		this.numero = numero;
 		this.numDep = numDep;
-		this.siglaDep = siglaDep;
-		this.torre = torre;
 		this.ciudad = ciudad;
 		this.precio = precio;
 		this.estaDisponible = estaDisponible;
@@ -59,33 +55,13 @@ public class Departamento {
 	}
 
 
-	public Integer getNumDep() {
+	public String getNumDep() {
 		return numDep;
 	}
 
 
-	public void setNumDep(Integer numDep) {
+	public void setNumDep(String numDep) {
 		this.numDep = numDep;
-	}
-
-
-	public String getSiglaDep() {
-		return siglaDep;
-	}
-
-
-	public void setSiglaDep(String siglaDep) {
-		this.siglaDep = siglaDep;
-	}
-
-
-	public String getTorre() {
-		return torre;
-	}
-
-
-	public void setTorre(String torre) {
-		this.torre = torre;
 	}
 
 
@@ -140,8 +116,8 @@ public class Departamento {
 	
 	@Override
 	public String toString() {
-		return "Calle: " + calle + " " + numero + ", Departamento: " + numDep + siglaDep + ", Torre:" + torre + ", Ciudad: " + ciudad + ", Precio: " + precio + ", " 
-	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + " Propietario: " + propietario;
+		return "Id: " + idDep + ", Calle: " + calle + " " + numero + ", Departamento: " + numDep + ", Ciudad: " + ciudad + ", Precio: " + precio + ", " 
+	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + propietario.getApellido();
 	}
 	
 	

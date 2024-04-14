@@ -120,8 +120,8 @@ public class Terreno {
 	
 	@Override
 	public String toString() {
-		return "Calle: " + calle + " " + numero + ", Ciudad: " + ciudad + "Mts cuadrados: " + mtsCuadrados +  ", Precio: " + precio + ", " 
-	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + " Propietario: " + propietario;
+		return "Id: " + idTerreno + ", Calle: " + calle + " " + numero + ", Ciudad: " + ciudad + "Mts cuadrados: " + mtsCuadrados +  ", Precio: " + precio + ", " 
+	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + propietario.getApellido();
 	}
 	
 	
