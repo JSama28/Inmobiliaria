@@ -12,9 +12,7 @@ public class Inmobiliaria {
 	private Departamento departamentos[];
 	private Ph phs[];
 	private Terreno terrenos[];
-	private Propiedad propiedades[];
 	private Cliente clientes[];
-//	private Propietario propietarios[];
 	private final Integer cantidadMaximaDePropiedades = 100;
 	private final Integer cantidadMaximaDeClientes = 100;
 
@@ -27,20 +25,18 @@ public class Inmobiliaria {
 		this.departamentos = new Departamento[cantidadMaximaDePropiedades];
 		this.phs = new Ph[cantidadMaximaDePropiedades];
 		this.terrenos = new Terreno[cantidadMaximaDePropiedades];
-		this.propiedades = new Propiedad[cantidadMaximaDePropiedades];
 		this.clientes = new Cliente[cantidadMaximaDeClientes];
-	//	this.propietarios = new Propietarios[];
-		
-		 Propietario propietarioJavi = new Propietario("Javier", "Perez", 2421, "javi@email.com", "44581957");
+
+		Propietario propietarioJavi = new Propietario("Javier", "Perez", 2421, "javi@email.com", "44581957");
 		this.phs[0] = new Ph("ardoino", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "P1");
-		this.phs[1] = new Ph("ardoino", 475, "5", "ramos", 3.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "P2");
+		this.phs[1] = new Ph("ardoino", 475, "5", "moros", 3.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "P2");
 		this.casas[0] = new Casa("monteagudo", 254, "temos", 3.5, true, TipoDeOperacion.VENTA, propietarioJavi, "C1");
-		this.casas[1] = new Casa("monteagudo", 24, "temos", 10.5, true, TipoDeOperacion.VENTA, propietarioJavi, "C2");
-		this.departamentos[0] = new Departamento("escalada", 3454, "1", "pozos", 1.5, true, TipoDeOperacion.VENTA, propietarioJavi,
+		this.casas[1] = new Casa("monteagudo", 24, "remos", 10.5, true, TipoDeOperacion.VENTA, propietarioJavi, "C2");
+		this.departamentos[0] = new Departamento("escalada", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietarioJavi,
 				"D1");
 		this.departamentos[1] = new Departamento("escalada", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietarioJavi,
 				"D2");
-		this.terrenos[0] = new Terreno("suipacha", 1554, "atres", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "T1");
+		this.terrenos[0] = new Terreno("suipacha", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "T1");
 		this.terrenos[1] = new Terreno("suipacha", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.ALQUILER, propietarioJavi, "T2");
 	}
 
@@ -80,7 +76,7 @@ public class Inmobiliaria {
 		for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
 			if (casas[i] == null) {
 				casas[i] = nuevaCasa;
-				System.out.println("SE AGREGO CASA." + nuevaCasa.toString());
+				System.out.println("SE AGREGO CASA: " + nuevaCasa.toString());
 				return true;
 			}
 		}
@@ -91,7 +87,7 @@ public class Inmobiliaria {
 		for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
 			if (departamentos[i] == null) {
 				departamentos[i] = nuevoDept;
-				System.out.println("SE AGREGO DEPARTAMENTO." + nuevoDept.toString());
+				System.out.println("SE AGREGO DEPARTAMENTO: " + nuevoDept.toString());
 				return true;
 			}
 		}
@@ -102,7 +98,7 @@ public class Inmobiliaria {
 		for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
 			if (phs[i] == null) {
 				phs[i] = nuevoPh;
-				System.out.println("SE AGREGO PH." + nuevoPh.toString());
+				System.out.println("SE AGREGO PH: " + nuevoPh.toString());
 				return true;
 			}
 		}
@@ -113,7 +109,7 @@ public class Inmobiliaria {
 		for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
 			if (terrenos[i] == null) {
 				terrenos[i] = nuevoTerreno;
-				System.out.println("SE AGREGO TERRENO." + nuevoTerreno.toString());
+				System.out.println("SE AGREGO TERRENO: " + nuevoTerreno.toString());
 				return true;
 			}
 		}
@@ -156,9 +152,9 @@ public class Inmobiliaria {
 		case TERRENO:
 			Terreno terreno = crearTerreno();
 			return agregarTerreno(terreno);
+		default:
+			return false;
 		}
-
-		return false;
 	}
 
 	public Casa crearCasa() {
@@ -416,15 +412,15 @@ public class Inmobiliaria {
 		System.out.println("\nPHS: ");
 		for (Ph phs : phsOrdenados) {
 			if(phs != null){
-			System.out.println(phs.toString());
+				System.out.println(phs.toString());
 			}
 		}
 
 		System.out.println("\nTERRENOS: ");
 		for (Terreno terrenos : terrenosOrdenadas) {
 			if(terrenos != null){
-			System.out.println(terrenos.toString());
-		}
+				System.out.println(terrenos.toString());
+			}
 		}
 
 		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
@@ -440,7 +436,6 @@ public class Inmobiliaria {
 				break;
 			}
 		}
-
 		return cantidad;
 	}
 
@@ -460,7 +455,6 @@ public class Inmobiliaria {
 				}
 			}
 		}
-
 		return casasOrdenadas;
 	}
 
@@ -480,7 +474,6 @@ public class Inmobiliaria {
 				}
 			}
 		}
-
 		return deptsOrdenados;
 	}
 
@@ -500,7 +493,6 @@ public class Inmobiliaria {
 				}
 			}
 		}
-
 		return phsOrdenados;
 	}
 
@@ -520,7 +512,6 @@ public class Inmobiliaria {
 				}
 			}
 		}
-
 		return terrenosOrdenados;
 	}
 
@@ -530,7 +521,7 @@ public class Inmobiliaria {
 		mostrarPhsPorPrecio(precioMin, precioMax);
 		mostrarTerrenosPorPrecio(precioMin, precioMax);
 	}
-	
+
 	public void mostrarCasasPorPrecio(Double precioMin, Double precioMax) {
 		Casa[] casasEntrePrecio = new Casa[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
@@ -550,7 +541,7 @@ public class Inmobiliaria {
 			System.out.println(descripcionPropiedad);
 		}
 	}
-	
+
 	public void mostrarDepartamentosPorPrecio(Double precioMin, Double precioMax) {
 		Departamento[] deptEntrePrecio = new Departamento[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
@@ -570,7 +561,7 @@ public class Inmobiliaria {
 			System.out.println(descripcionPropiedad);
 		}
 	}
-	
+
 	public void mostrarPhsPorPrecio(Double precioMin, Double precioMax) {
 		Ph[] phsEntrePrecio = new Ph[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
@@ -590,7 +581,7 @@ public class Inmobiliaria {
 			System.out.println(descripcionPropiedad);
 		}
 	}
-	
+
 	public void mostrarTerrenosPorPrecio(Double precioMin, Double precioMax) {
 		Terreno[] terrenosEntrePrecio = new Terreno[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
@@ -611,67 +602,190 @@ public class Inmobiliaria {
 		}
 	}
 
-	//editar
-		public Propiedad[] getPropiedadesOrdenadasPorUbicacion() {
-			Propiedad[] propOrdenadas = propiedades;
-			int cantidadTotal = getCantidadDeElementos(propiedades);
+	public Casa[] getCasasOrdenadasPorUbicacion() {
+		Casa[] casasEnUbicacion = casas;
+		int cantidadTotal = getCantidadDeElementos(casas);
 
-			Propiedad propAuxiliar;
+		Casa propAuxiliar;
 
-			for (int i = 0; i < cantidadTotal; i++) {
-				for (int j = 1; j < (cantidadTotal - i); j++) {
-					if (propOrdenadas[j - 1].getCiudad().compareTo(propOrdenadas[j].getCiudad()) > 0) {
-						// intercambiar elementos
-						propAuxiliar = propOrdenadas[j - 1];
-						propOrdenadas[j - 1] = propOrdenadas[j];
-						propOrdenadas[j] = propAuxiliar;
-					}
+		for(int i = 0; i < cantidadTotal; i++) {
+			for(int j = 1; j < (cantidadTotal - i); j++) {
+				if(casasEnUbicacion[j - 1].getCiudad().compareTo(casasEnUbicacion[j].getCiudad()) > 0) {
+					// intercambiar elementos
+					propAuxiliar = casasEnUbicacion[j - 1];
+					casasEnUbicacion[j - 1] = casasEnUbicacion[j];
+					casasEnUbicacion[j] = propAuxiliar;
 				}
 			}
-
-			return propOrdenadas;
 		}
-	//editar
-		public void obtenerListadoPorUbicacion() {
-			System.out.println("\nPROPIEDADES:\n");
-
-			Boolean noHayMasPropiedades = false;
-			Integer i = 0;
-
-			Propiedad[] propiedadesOrdenadas = getPropiedadesOrdenadasPorUbicacion();
-
-			while (noHayMasPropiedades == false && i < cantidadMaximaDePropiedades) {
-				System.out.println(propiedadesOrdenadas[i].toString());
-				i++;
-				if (propiedadesOrdenadas[i] == null) {
-					noHayMasPropiedades = true;
-				}
-			}
-
-			System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
-		}
-
-	//editar	
-	public void buscarPropiedadesPorUbicacion(String ubicacionBuscada) {
-		Propiedad[] propEnUbicacion = new Propiedad[cantidadMaximaDePropiedades];
-		Integer cantidadAgregada = 0;
-		int cantidadTotal = getCantidadDeElementos(propiedades);
-
-		for (int i = 0; i < cantidadTotal; i++) {
-			System.out.println(propiedades[i].getPrecio());
-
-			if (propiedades[i].getCiudad().equals(ubicacionBuscada)) {
-				propEnUbicacion[cantidadAgregada] = propiedades[i];
-				cantidadAgregada++;
-			}
-		}
-
-		System.out.println("\nPROPIEDADES DENTRO DE LA UBICACION DESEADA: " + cantidadAgregada);
-
-		for (int j = 0; j < cantidadAgregada; j++) {
-			String descripcionPropiedad = propEnUbicacion[j].toString();
-			System.out.println(descripcionPropiedad);
-		}
+		return casasEnUbicacion;
 	}
 
+	public Departamento[] getDepartamentosOrdenadosPorUbicacion() {
+		Departamento[] departamentosEnUbicacion = departamentos;
+		int cantidadTotal = getCantidadDeElementos(departamentos);
+
+		Departamento propAuxiliar;
+
+		for(int i = 0; i < cantidadTotal; i++) {
+			for(int j = 1; j < (cantidadTotal - i); j++) {
+				if(departamentosEnUbicacion[j - 1].getCiudad().compareTo(departamentosEnUbicacion[j].getCiudad()) > 0) {
+					// intercambiar elementos
+					propAuxiliar = departamentosEnUbicacion[j - 1];
+					departamentosEnUbicacion[j - 1] = departamentosEnUbicacion[j];
+					departamentosEnUbicacion[j] = propAuxiliar;
+				}
+			}
+		}
+		return departamentosEnUbicacion;
+	}
+
+	public Ph[] getPhsOrdenadosPorUbicacion() {
+		Ph[] phsEnUbicacion = phs;
+		int cantidadTotal = getCantidadDeElementos(phs);
+
+		Ph propAuxiliar;
+
+		for(int i = 0; i < cantidadTotal; i++) {
+			for(int j = 1; j < (cantidadTotal - i); j++) {
+				if(phsEnUbicacion[j - 1].getCiudad().compareTo(phsEnUbicacion[j].getCiudad()) > 0) {
+					// intercambiar elementos
+					propAuxiliar = phsEnUbicacion[j - 1];
+					phsEnUbicacion[j - 1] = phsEnUbicacion[j];
+					phsEnUbicacion[j] = propAuxiliar;
+				}
+			}
+		}
+		return phsEnUbicacion;
+	}
+
+	public Terreno[] getTerrenosOrdenadosPorUbicacion() {
+		Terreno[] terrenosEnUbicacion = terrenos;
+		int cantidadTotal = getCantidadDeElementos(terrenos);
+
+		Terreno propAuxiliar;
+
+		for(int i = 0; i < cantidadTotal; i++) {
+			for(int j = 1; j < (cantidadTotal - i); j++) {
+				if(terrenosEnUbicacion[j - 1].getCiudad().compareTo(terrenosEnUbicacion[j].getCiudad()) > 0) {
+					// intercambiar elementos
+					propAuxiliar = terrenosEnUbicacion[j - 1];
+					terrenosEnUbicacion[j - 1] = terrenosEnUbicacion[j];
+					terrenosEnUbicacion[j] = propAuxiliar;
+				}
+			}
+		}
+		return terrenosEnUbicacion;
+	}
+
+	public void buscarPropiedadesPorUbicacion(String ubicacion) {
+		obtenerListadoDeCasasPorUbicacion(ubicacion);
+		obtenerListadoDeDepartamentosPorUbicacion(ubicacion);
+		obtenerListadoDePhsPorUbicacion(ubicacion);
+		obtenerListadoDeTerrenosPorUbicacion(ubicacion);
+	}
+
+	public void obtenerListadoDeCasasPorUbicacion(String ciudad) {
+		System.out.println("\nCASAS EN UBICACION:");
+
+		for(Casa casita : casas) {
+			if(casita == null) {
+				break;
+			} else if(casita.getCiudad().contains(ciudad)) {
+				casita.toString();
+			}
+		}
+
+		System.out.println("NO HAY MAS CASAS A MOSTRAR.");
+	}
+
+	public void obtenerListadoDeDepartamentosPorUbicacion(String ciudad) {
+		System.out.println("\nDEPARTAMENTOS EN UBICACION:");
+
+		for(Departamento dept : departamentos) {
+			if(dept == null) {
+				break;
+			} else if(dept.getCiudad().contains(ciudad)) {
+				dept.toString();
+			}
+		}
+
+		System.out.println("NO HAY MAS DEPARTAMENTOS A MOSTRAR.");
+	}
+
+	public void obtenerListadoDePhsPorUbicacion(String ciudad) {
+		System.out.println("\nPHS EN UBICACION:");
+
+
+		for(Ph ph : phs) {
+			if(ph == null) {
+				break;
+			} else if(ph.getCiudad().contains(ciudad)) {
+				System.out.println(ph.toString());
+			}
+		}
+
+		System.out.println("NO HAY MAS PHS A MOSTRAR.");
+	}
+
+
+	public void obtenerListadoDeTerrenosPorUbicacion(String ciudad) {
+		System.out.println("\nTERRENOS EN UBICACION:");
+
+		for(Terreno terrenito: terrenos) {
+			if(terrenito == null) {
+				break;
+			} else if(terrenito.getCiudad().contains(ciudad)) {
+				System.out.println(terrenito.toString());
+			}
+		}
+
+		System.out.println("NO HAY MAS TERRENOS A MOSTRAR.");
+	}
+
+	public void obtenerListadoPorUbicacion() {
+		System.out.println("\nPROPIEDADES EN UBICACION:\n");
+
+		Casa[] casasOrdenadas = getCasasOrdenadasPorUbicacion();
+		Departamento[] deptsOrdenados = getDepartamentosOrdenadosPorUbicacion();
+		Ph[] phsOrdenados = getPhsOrdenadosPorUbicacion();
+		Terreno[] terrenosOrdenadas = getTerrenosOrdenadosPorUbicacion();
+
+		System.out.println("\nCASAS:");
+		for (Casa casita : casasOrdenadas) {
+			if(casita != null) {
+				System.out.println(casita.toString());
+			} else {
+				break;
+			}
+		}
+
+		System.out.println("\nDEPARTAMENTOS:");
+		for (Departamento depts : deptsOrdenados) {
+			if(depts != null) {
+				System.out.println(depts.toString());
+
+			}
+		}
+
+		System.out.println("\nPHS: ");
+		for (Ph phs : phsOrdenados) {
+			if(phs != null){
+				System.out.println(phs.toString());
+			}
+		}
+
+		System.out.println("\nTERRENOS: ");
+		for (Terreno terrenos : terrenosOrdenadas) {
+			if(terrenos != null){
+				System.out.println(terrenos.toString());
+			}
+		}
+
+		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
+	}
+	
+	public void realizarVenta() {
+		
+	}
 }

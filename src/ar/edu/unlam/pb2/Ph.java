@@ -118,7 +118,7 @@ public class Ph {
 	
 	@Override
 	public String toString() {
-		return "Id: " + idPh + ", Calle: " + calle + " " + numero + ", NroPh: " + numPh + ", Ciudad: " + ciudad + ", Precio: " + precio + ", " 
+		return "Id: " + idPh + ", Calle: " + calle + " " + numero + ", NroPh: " + numPh + ", Ciudad: " + ciudad + ", Precio: " + precio + ", esta " 
 	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + " " + propietario.getApellido();
 	
 	}

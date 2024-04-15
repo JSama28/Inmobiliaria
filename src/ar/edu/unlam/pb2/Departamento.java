@@ -116,7 +116,7 @@ public class Departamento {
 	
 	@Override
 	public String toString() {
-		return "Id: " + idDep + ", Calle: " + calle + " " + numero + ", Departamento: " + numDep + ", Ciudad: " + ciudad + ", Precio: " + precio + ", " 
+		return "Id: " + idDep + ", Calle: " + calle + " " + numero + ", Departamento: " + numDep + ", Ciudad: " + ciudad + ", Precio: " + precio + ", esta " 
 	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + " "  + propietario.getApellido();
 	}
 	
