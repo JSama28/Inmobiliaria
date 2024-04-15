@@ -92,7 +92,7 @@ public class Casa {
 	@Override
 	public String toString() {
 		return "Id: " + idCasa +", Calle: " + calle + " " + numero + ", " + ciudad + ", precio: " + precio + ", " 
-	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + propietario.getApellido();
+	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + " " + propietario.getApellido();
 	}
 	
 }
