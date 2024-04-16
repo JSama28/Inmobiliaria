@@ -1,5 +1,6 @@
 package ar.edu.unlam.pb2;
 
+
 import java.util.Scanner;
 
 public class Inmobiliaria {
@@ -28,16 +29,17 @@ public class Inmobiliaria {
 		this.clientes = new Cliente[cantidadMaximaDeClientes];
 
 		Propietario propietarioJavi = new Propietario("Javier", "Perez", 2421, "javi@email.com", "44581957");
+		Propietario propietarioNic = new Propietario("Nic", "Arez", 5875, "nic@email.com", "44569723");
 		this.phs[0] = new Ph("ardoino", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "P1");
-		this.phs[1] = new Ph("ardoino", 475, "5", "moros", 3.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "P2");
+		this.phs[1] = new Ph("ardoino", 475, "5", "moros", 3.5, true, TipoDeOperacion.ALQUILER, propietarioNic, "P2");
 		this.casas[0] = new Casa("monteagudo", 254, "temos", 3.5, true, TipoDeOperacion.VENTA, propietarioJavi, "C1");
-		this.casas[1] = new Casa("monteagudo", 24, "remos", 10.5, true, TipoDeOperacion.VENTA, propietarioJavi, "C2");
+		this.casas[1] = new Casa("monteagudo", 24, "remos", 10.5, true, TipoDeOperacion.VENTA, propietarioNic, "C2");
 		this.departamentos[0] = new Departamento("escalada", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietarioJavi,
 				"D1");
-		this.departamentos[1] = new Departamento("escalada", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietarioJavi,
+		this.departamentos[1] = new Departamento("escalada", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietarioNic,
 				"D2");
 		this.terrenos[0] = new Terreno("suipacha", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "T1");
-		this.terrenos[1] = new Terreno("suipacha", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.ALQUILER, propietarioJavi, "T2");
+		this.terrenos[1] = new Terreno("suipacha", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.ALQUILER, propietarioNic, "T2");
 	}
 
 	public String getNombre() {
@@ -784,8 +786,143 @@ public class Inmobiliaria {
 
 		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
 	}
-	
-	public void realizarVenta() {
-		
+
+	public void realizarVenta(String propiedadAVender, Propietario propietarioCompraNuevo) {
+
+		switch (propiedadAVender.charAt(0)) {
+		case 'C':
+			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
+				if (casas[i] != null) {
+					Casa casa = casas[i];
+					String idCasa = casa.getIdCasa();
+
+					if (propiedadAVender.equals(idCasa)) {
+						casa.setPropietario(propietarioCompraNuevo);
+						System.out.println("SE COMPLETO VENTA DE " + casa.toString());
+					}
+				}		
+			}
+
+		case 'D':
+			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
+				if (departamentos[i] != null) {
+					Departamento departamento = departamentos[i];
+
+					if (propiedadAVender.equals(departamento.getIdDep())) {
+						departamento.setPropietario(propietarioCompraNuevo);
+						System.out.println("SE COMPLETO VENTA DE " + departamento.toString());
+					}
+				}
+			}
+
+		case 'P':
+			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
+				if (phs[i] != null) {
+					Ph ph = phs[i];
+
+					if (propiedadAVender.equals(ph.getIdPh())) {
+						ph.setPropietario(propietarioCompraNuevo);
+						System.out.println("SE COMPLETO VENTA DE " + ph.toString());
+					}
+				}
+			}
+		case 'T':
+			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
+				if (terrenos[i] != null) {
+					Terreno terreno = terrenos[i];
+
+					if (propiedadAVender.equals(terreno.getIdTerreno())) {
+						terreno.setPropietario(propietarioCompraNuevo);
+						System.out.println("SE COMPLETO VENTA DE " + terreno.toString());
+					}
+				}
+			}
+		}
 	}
+
+	public void realizarAlquiler(String propiedadAAlquilar, Inquilino inquilino, String fechaInicio, String fechaFin) {
+
+		switch (propiedadAAlquilar.charAt(0)) {
+		case 'C':
+			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
+				if (casas[i] != null) {
+					Casa casa = casas[i];
+					String idCasa = casa.getIdCasa();
+
+					if (propiedadAAlquilar.equals(idCasa)) {
+						casa.setInquilino(inquilino);
+						System.out.println("\nSE COMPLETO ALQUILER DE LA CASA: \n" + casa.toString() + 
+						"\nINQUILINO: " + inquilino.toString()
+						+ "\n FECHA INICIO: " + fechaInicio + "\n FECHA FIN: " + fechaFin);
+					}
+				}		
+			}
+
+		case 'D':
+			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
+				if (departamentos[i] != null) {
+					Departamento departamento = departamentos[i];
+
+					if (propiedadAAlquilar.equals(departamento.getIdDep())) {
+						departamento.setInquilino(inquilino);
+						System.out.println("\nSE COMPLETO ALQUILER DEL DEPARTAMENTO: \n" + departamento.toString() + 
+						"\nINQUILINO: " + inquilino.toString()
+						+ "\n FECHA INICIO: " + fechaInicio + "\n FECHA FIN: " + fechaFin);
+					}
+				}
+			}
+
+		case 'P':
+			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
+				if (phs[i] != null) {
+					Ph ph = phs[i];
+
+					if (propiedadAAlquilar.equals(ph.getIdPh())) {
+						ph.setInquilino(inquilino);
+						System.out.println("\nSE COMPLETO ALQUILER DEL PH:  \n" + ph.toString() + 
+						"\nINQUILINO: " inquilino.toString()
+						+ "\n FECHA INICIO: " + fechaInicio + "\n FECHA FIN: " + fechaFin);
+					}
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

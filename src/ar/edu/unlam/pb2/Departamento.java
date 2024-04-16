@@ -11,6 +11,7 @@ public class Departamento {
 	private TipoDeOperacion tipo;
 	private Propietario propietario;
 	private String idDep;
+	private Inquilino inquilino;
 	
 	
 	public Departamento(String calle, Integer numero, String numDep, String ciudad, Double precio, Boolean estaDisponible, 
@@ -112,6 +113,14 @@ public class Departamento {
 
 	public void setPropietario(Propietario propietario) {
 		this.propietario = propietario;
+	}
+	
+	public Inquilino getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Inquilino inquilino) {
+		this.inquilino = inquilino;
 	}
 	
 	@Override

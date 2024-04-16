@@ -10,6 +10,7 @@ public class Casa {
 	private TipoDeOperacion tipo;
 	private Propietario propietario;
 	private String idCasa;
+	private Inquilino inquilino;
 	
 	public Casa(String calle, Integer numero, String ciudad, Double precio, Boolean estaDisponible,
 			TipoDeOperacion tipo, Propietario propietario, String idCasa) {
@@ -87,6 +88,14 @@ public class Casa {
 
 	public void setIdCasa(String idCasa) {
 		this.idCasa = idCasa;
+	}
+	
+	public Inquilino getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Inquilino inquilino) {
+		this.inquilino = inquilino;
 	}
 
 	@Override

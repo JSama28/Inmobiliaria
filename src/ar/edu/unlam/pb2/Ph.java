@@ -11,6 +11,7 @@ public class Ph {
 	private TipoDeOperacion tipo;
 	private Propietario propietario;
 	private String idPh;
+	private Inquilino inquilino;
 	
 	
 	public Ph(String calle, Integer numero, String numPh, String ciudad, Double precio, Boolean estaDisponible,
@@ -113,6 +114,14 @@ public class Ph {
 
 	public void setPropietario(Propietario propietario) {
 		this.propietario = propietario;
+	}
+	
+	public Inquilino getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Inquilino inquilino) {
+		this.inquilino = inquilino;
 	}
 	
 	

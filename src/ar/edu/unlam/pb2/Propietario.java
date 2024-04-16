@@ -4,7 +4,7 @@ public class Propietario {
 	private String nombre;
 	private String apellido;
 	private Integer dni;
-	private String domicilio;
+	private String email;
 	private String telefono;
 	private Casa casa[];
 	private Departamento departamento[];
@@ -14,12 +14,12 @@ public class Propietario {
 
 	
 
-	public Propietario(String nombre, String apellido, Integer dni, String domicilio, String telefono) {
+	public Propietario(String nombre, String apellido, Integer dni, String email, String telefono) {
 	
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
-		this.domicilio = domicilio;
+		this.email = email;
 		this.telefono = telefono;
 		this.casa = new Casa[cantidadMaximaDePropiedades];
 		this.departamento = new Departamento[cantidadMaximaDePropiedades];
@@ -52,12 +52,12 @@ public class Propietario {
 		this.dni = dni;
 	}
 
-	public String getDomicilio() {
-		return domicilio;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDomicilio(String domicilio) {
-		this.domicilio = domicilio;
+	public void setEmail(String domicilio) {
+		this.email = domicilio;
 	}
 
 	public String getTelefono() {

@@ -1,5 +1,8 @@
 package ar.edu.unlam.pb2;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Scanner;
 
 public class InterfazInmobiliaria {
@@ -81,9 +84,59 @@ public class InterfazInmobiliaria {
 				break;
 				
 			case REALIZAR_VENTA:
+				System.out.println("\nIngresar codigo de propiedad a vender: ");
+				String propiedad = teclado.next();
+				
+				System.out.println("\nIngresar nombre propietario nuevo: ");
+				String nombre = teclado.next();
+				
+				System.out.println("\nIngresar apellido propietario nuevo: ");
+				String apellido = teclado.next();
+				
+				System.out.println("\nIngresar dni propietario nuevo: ");
+				Integer dni = teclado.nextInt();
+				
+				System.out.println("\nIngresar email propietario nuevo: ");
+				String email = teclado.next();
+				
+				System.out.println("\nIngresar telefono propietario nuevo: ");
+				String telefono = teclado.next();
+				
+				Propietario propietarioNuevo = new Propietario(nombre, apellido, dni, email, telefono);
+				inmobiliariaActual.realizarVenta(propiedad, propietarioNuevo);
 				break;
 				
 			case REALIZAR_ALQUILER:
+
+				System.out.println("\nIngresar codigo de propiedad a alquilar: ");
+				String propiedadAlquilada = teclado.next();
+				
+				System.out.println("\nIngresar nombre inquilino nuevo: ");
+				String nombreInq = teclado.next();
+				
+				System.out.println("\nIngresar apellido inquilino nuevo: ");
+				String apellidoInq = teclado.next();
+				
+				System.out.println("\nIngresar dni inquilino nuevo: ");
+				Integer dniInq = teclado.nextInt();
+				
+				System.out.println("\nIngresar email inquilino nuevo: ");
+				String emailInq = teclado.next();
+				
+				System.out.println("\nIngresar telefono inquilino nuevo: ");
+				String telefonoInq = teclado.next();
+				
+				System.out.println("\nIngresar fecha inicio: dd-MM-yyyy ");
+				String fechaInicio = teclado.next();
+				
+				System.out.println("\nIngresar fecha fin: dd-MM-yyyy ");
+				String fechaFin = teclado.next();
+				
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+				LocalDate fInicio = LocalDate.parse(fechaInicio, formatter);
+				LocalDate fFin = LocalDate.parse(fechaFin, formatter);
+				Inquilino inquilino = new Inquilino(nombreInq, apellidoInq, dniInq, emailInq, telefonoInq);
+				inmobiliariaActual.realizarAlquiler(propiedadAlquilada,inquilino, fechaInicio, fechaFin);
 				break;
 				
 			case SALIR:
