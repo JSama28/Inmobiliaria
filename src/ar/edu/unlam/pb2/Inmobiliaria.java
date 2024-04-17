@@ -3,6 +3,8 @@ package ar.edu.unlam.pb2;
 
 import java.util.Scanner;
 
+import javax.annotation.processing.AbstractProcessor;
+
 public class Inmobiliaria {
 
 	private String nombre;
@@ -28,18 +30,18 @@ public class Inmobiliaria {
 		this.terrenos = new Terreno[cantidadMaximaDePropiedades];
 		this.clientes = new Cliente[cantidadMaximaDeClientes];
 
-		Propietario propietarioJavi = new Propietario("Javier", "Perez", 2421, "javi@email.com", "44581957");
-		Propietario propietarioNic = new Propietario("Nic", "Arez", 5875, "nic@email.com", "44569723");
-		this.phs[0] = new Ph("ardoino", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "P1");
-		this.phs[1] = new Ph("ardoino", 475, "5", "moros", 3.5, true, TipoDeOperacion.ALQUILER, propietarioNic, "P2");
-		this.casas[0] = new Casa("monteagudo", 254, "temos", 3.5, true, TipoDeOperacion.VENTA, propietarioJavi, "C1");
-		this.casas[1] = new Casa("monteagudo", 24, "remos", 10.5, true, TipoDeOperacion.VENTA, propietarioNic, "C2");
-		this.departamentos[0] = new Departamento("escalada", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietarioJavi,
-				"D1");
-		this.departamentos[1] = new Departamento("escalada", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietarioNic,
-				"D2");
-		this.terrenos[0] = new Terreno("suipacha", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "T1");
-		this.terrenos[1] = new Terreno("suipacha", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.ALQUILER, propietarioNic, "T2");
+//		Propietario propietarioJavi = new Propietario("Javier", "Perez", 2421, "javi@email.com", "44581957");
+//		Propietario propietarioNic = new Propietario("Nic", "Arez", 5875, "nic@email.com", "44569723");
+//		this.phs[0] = new Ph("ardoino", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "P1");
+//		this.phs[1] = new Ph("ardoino", 475, "5", "moros", 3.5, true, TipoDeOperacion.ALQUILER, propietarioNic, "P2");
+//		this.casas[0] = new Casa("monteagudo", 254, "temos", 3.5, true, TipoDeOperacion.VENTA, propietarioJavi, "C1");
+//		this.casas[1] = new Casa("monteagudo", 24, "remos", 10.5, true, TipoDeOperacion.VENTA, propietarioNic, "C2");
+//		this.departamentos[0] = new Departamento("escalada", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietarioJavi,
+//				"D1");
+//		this.departamentos[1] = new Departamento("escalada", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietarioNic,
+//				"D2");
+//		this.terrenos[0] = new Terreno("suipacha", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietarioJavi, "T1");
+//		this.terrenos[1] = new Terreno("suipacha", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.ALQUILER, propietarioNic, "T2");
 	}
 
 	public String getNombre() {
@@ -79,7 +81,15 @@ public class Inmobiliaria {
 			if (casas[i] == null) {
 				casas[i] = nuevaCasa;
 				System.out.println("SE AGREGO CASA: " + nuevaCasa.toString());
-				return true;
+				return true;	
+			} 
+			
+			Boolean mismaCalle = casas[i].getCalle().equals(nuevaCasa.getCalle());
+			Boolean mismoNumCalle = casas[i].getNumero().equals(nuevaCasa.getNumero());
+			Boolean mismaCiudad = casas[i].getCiudad().equals(nuevaCasa.getCiudad());
+			
+			if(mismaCalle && mismoNumCalle && mismaCiudad) {
+				return false;
 			}
 		}
 		return false;
@@ -92,6 +102,13 @@ public class Inmobiliaria {
 				System.out.println("SE AGREGO DEPARTAMENTO: " + nuevoDept.toString());
 				return true;
 			}
+			
+			Boolean mismaCalle = departamentos[i].getCalle().equals(nuevoDept.getCalle());
+			Boolean mismoNumCalle = departamentos[i].getNumero().equals(nuevoDept.getNumero());
+			Boolean mismaCiudad = departamentos[i].getCiudad().equals(nuevoDept.getCiudad());
+			if(mismaCalle && mismoNumCalle && mismaCiudad) {
+				return false;
+			}
 		}
 		return false;
 	}
@@ -102,6 +119,13 @@ public class Inmobiliaria {
 				phs[i] = nuevoPh;
 				System.out.println("SE AGREGO PH: " + nuevoPh.toString());
 				return true;
+			}
+			
+			Boolean mismaCalle = phs[i].getCalle().equals(nuevoPh.getCalle());
+			Boolean mismoNumCalle = phs[i].getNumero().equals(nuevoPh.getNumero());
+			Boolean mismaCiudad = phs[i].getCiudad().equals(nuevoPh.getCiudad());
+			if(mismaCalle && mismoNumCalle && mismaCiudad) {
+				return false;
 			}
 		}
 		return false;
@@ -114,6 +138,7 @@ public class Inmobiliaria {
 				System.out.println("SE AGREGO TERRENO: " + nuevoTerreno.toString());
 				return true;
 			}
+
 		}
 		return false;
 	}
@@ -524,7 +549,7 @@ public class Inmobiliaria {
 		mostrarTerrenosPorPrecio(precioMin, precioMax);
 	}
 
-	public void mostrarCasasPorPrecio(Double precioMin, Double precioMax) {
+	public Casa[] mostrarCasasPorPrecio(Double precioMin, Double precioMax) {
 		Casa[] casasEntrePrecio = new Casa[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
 		int cantidadTotal = getCantidadDeElementos(casas);
@@ -542,9 +567,10 @@ public class Inmobiliaria {
 			String descripcionPropiedad = casasEntrePrecio[j].toString();
 			System.out.println(descripcionPropiedad);
 		}
+		return cantidadAgregada > 0 ? casasEntrePrecio : null;
 	}
 
-	public void mostrarDepartamentosPorPrecio(Double precioMin, Double precioMax) {
+	public Departamento[] mostrarDepartamentosPorPrecio(Double precioMin, Double precioMax) {
 		Departamento[] deptEntrePrecio = new Departamento[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
 		int cantidadTotal = getCantidadDeElementos(departamentos);
@@ -562,9 +588,10 @@ public class Inmobiliaria {
 			String descripcionPropiedad = deptEntrePrecio[j].toString();
 			System.out.println(descripcionPropiedad);
 		}
+		return cantidadAgregada > 0 ? deptEntrePrecio : null;
 	}
 
-	public void mostrarPhsPorPrecio(Double precioMin, Double precioMax) {
+	public Ph[] mostrarPhsPorPrecio(Double precioMin, Double precioMax) {
 		Ph[] phsEntrePrecio = new Ph[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
 		int cantidadTotal = getCantidadDeElementos(phs);
@@ -582,9 +609,11 @@ public class Inmobiliaria {
 			String descripcionPropiedad = phsEntrePrecio[j].toString();
 			System.out.println(descripcionPropiedad);
 		}
+		return cantidadAgregada > 0 ? phsEntrePrecio : null;
+
 	}
 
-	public void mostrarTerrenosPorPrecio(Double precioMin, Double precioMax) {
+	public Terreno[] mostrarTerrenosPorPrecio(Double precioMin, Double precioMax) {
 		Terreno[] terrenosEntrePrecio = new Terreno[cantidadMaximaDePropiedades];
 		Integer cantidadAgregada = 0;
 		int cantidadTotal = getCantidadDeElementos(terrenos);
@@ -602,6 +631,8 @@ public class Inmobiliaria {
 			String descripcionPropiedad = terrenosEntrePrecio[j].toString();
 			System.out.println(descripcionPropiedad);
 		}
+		return cantidadAgregada > 0 ? terrenosEntrePrecio : null;
+
 	}
 
 	public Casa[] getCasasOrdenadasPorUbicacion() {
@@ -880,7 +911,7 @@ public class Inmobiliaria {
 					if (propiedadAAlquilar.equals(ph.getIdPh())) {
 						ph.setInquilino(inquilino);
 						System.out.println("\nSE COMPLETO ALQUILER DEL PH:  \n" + ph.toString() + 
-						"\nINQUILINO: " inquilino.toString()
+						"\nINQUILINO: " + inquilino.toString()
 						+ "\n FECHA INICIO: " + fechaInicio + "\n FECHA FIN: " + fechaFin);
 					}
 				}
@@ -888,11 +919,37 @@ public class Inmobiliaria {
 		}
 	}
 
+	public Double valorPromedioCasas() {
+		Double sum = 0.0;
+		Integer cantCasas = 0;
+		
+		for(int i = 0; i < cantidadMaximaDePropiedades; i++) {
+			if(casas[i] != null) {
+				sum += casas[i].getPrecio();
+				cantCasas++;
+			} else {
+				break;
+			}
+		}
+		Double promedio = sum / cantCasas;
+		return promedio;
+	}
 
-
-
-
-
+	public Double valorPromedioDepartamentos() {
+		Double sum = 0.0;
+		Integer cantDepts = 0;
+		
+		for(int i = 0; i < cantidadMaximaDePropiedades; i++) {
+			if(departamentos[i] != null) {
+				sum += departamentos[i].getPrecio();
+				cantDepts++;
+			} else {
+				break;
+			}
+		}
+		Double promedio = sum / cantDepts;
+		return promedio;
+	}
 
 
 
