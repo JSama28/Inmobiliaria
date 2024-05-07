@@ -337,7 +337,7 @@ public class Inmobiliaria {
 			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
 				if (casas[i] != null) {
 					Casa casa = casas[i];
-					String idCasa = casa.getIdCasa();
+					String idCasa = casa.getId();
 
 					if (idPropiedad.equals(idCasa)) {
 						System.out.println(casas[i].toString());
@@ -352,7 +352,7 @@ public class Inmobiliaria {
 				if (departamentos[i] != null) {
 					Departamento departamento = departamentos[i];
 
-					if (idPropiedad.equals(departamento.getIdDep())) {
+					if (idPropiedad.equals(departamento.getId())) {
 						System.out.println(departamentos[i].toString());
 						departamentos[i] = crearDepartamento();
 						return true;
@@ -365,7 +365,7 @@ public class Inmobiliaria {
 				if (phs[i] != null) {
 					Ph ph = phs[i];
 
-					if (idPropiedad.equals(ph.getIdPh())) {
+					if (idPropiedad.equals(ph.getId())) {
 						System.out.println(phs[i].toString());
 						phs[i] = crearPh();
 						return true;
@@ -377,7 +377,7 @@ public class Inmobiliaria {
 				if (terrenos[i] != null) {
 					Terreno terreno = terrenos[i];
 
-					if (idPropiedad.equals(terreno.getIdTerreno())) {
+					if (idPropiedad.equals(terreno.getId())) {
 						System.out.println(terrenos[i].toString());
 						terrenos[i] = crearTerreno();
 						return true;

@@ -5,15 +5,15 @@ public class Cliente {
 	private String nombre;
 	private String apellido;
 	private Integer dni;
-	private String domicilio;
+	private String email;
 	private String telefono;
 	
-	public Cliente(String nombre, String apellido, Integer dni, String domicilio, String telefono) {
+	public Cliente(String nombre, String apellido, Integer dni, String email, String telefono) {
 	
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
-		this.domicilio = domicilio;
+		this.email = email;
 		this.telefono = telefono;
 	}
 
@@ -41,12 +41,12 @@ public class Cliente {
 		this.dni = dni;
 	}
 
-	public String getDomicilio() {
-		return domicilio;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDomicilio(String domicilio) {
-		this.domicilio = domicilio;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getTelefono() {

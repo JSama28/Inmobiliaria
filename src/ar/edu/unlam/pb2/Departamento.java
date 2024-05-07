@@ -1,120 +1,26 @@
 package ar.edu.unlam.pb2;
 
-public class Departamento {
+public class Departamento extends Propiedad {
 
-	private String calle;
-	private Integer numero;
 	private String numDep;
-	private String ciudad;
-	private Double precio;
-	private Boolean estaDisponible;
-	private TipoDeOperacion tipo;
-	private Propietario propietario;
-	private String idDep;
 	private Inquilino inquilino;
 	
-	
-	public Departamento(String calle, Integer numero, String numDep, String ciudad, Double precio, Boolean estaDisponible, 
-			TipoDeOperacion tipo, Propietario propietario, String idDep) {
+	public Departamento(String calle, Integer numero, String numDep, String ciudad, Double precio, Boolean estaDisponible,
+			TipoDeOperacion tipo, Propietario propietario, Inquilino inquilino, String id) {
+		super(calle, numero, ciudad, precio, estaDisponible, tipo, propietario, id);
 		
-		this.calle = calle;
-		this.numero = numero;
 		this.numDep = numDep;
-		this.ciudad = ciudad;
-		this.precio = precio;
-		this.estaDisponible = estaDisponible;
-		this.tipo = tipo;
-		this.propietario = propietario;
-		this.idDep = idDep;
+		this.inquilino = inquilino;
 	}
-
-	public String getIdDep() {
-		return idDep;
-	}
-	
-	public void setIdDep(String idDep) {
-		this.idDep = idDep;
-	}
-
-	public String getCalle() {
-		return calle;
-	}
-
-
-	public void setCalle(String calle) {
-		this.calle = calle;
-	}
-
-
-	public Integer getNumero() {
-		return numero;
-	}
-
-
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
 
 	public String getNumDep() {
 		return numDep;
 	}
 
-
 	public void setNumDep(String numDep) {
 		this.numDep = numDep;
 	}
 
-
-	public String getCiudad() {
-		return ciudad;
-	}
-
-
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-
-
-	public Double getPrecio() {
-		return precio;
-	}
-
-
-	public void setPrecio(Double precio) {
-		this.precio = precio;
-	}
-
-
-	public Boolean getEstaDisponible() {
-		return estaDisponible;
-	}
-
-
-	public void setEstaDisponible(Boolean estaDisponible) {
-		this.estaDisponible = estaDisponible;
-	}
-
-
-	public TipoDeOperacion getTipo() {
-		return tipo;
-	}
-
-
-	public void setTipo(TipoDeOperacion tipo) {
-		this.tipo = tipo;
-	}
-
-
-	public Propietario getPropietario() {
-		return propietario;
-	}
-
-
-	public void setPropietario(Propietario propietario) {
-		this.propietario = propietario;
-	}
-	
 	public Inquilino getInquilino() {
 		return inquilino;
 	}
@@ -125,9 +31,8 @@ public class Departamento {
 	
 	@Override
 	public String toString() {
-		return "Id: " + idDep + ", Calle: " + calle + " " + numero + ", Departamento: " + numDep + ", Ciudad: " + ciudad + ", Precio: " + precio + ", esta " 
-	+ (estaDisponible == true ? "Disponible, " : "No disponible, ") + tipo + ", Propietario: " + propietario.getNombre() + " "  + propietario.getApellido();
+		return "Id: " + super.getId() + ", Calle: " + super.getCalle() + " " + super.getNumero() + ", Departamento: " + numDep + ", Ciudad: " + super.getCiudad() + ", Precio: " 
+				+ super.getPrecio() + ", esta " 	+ (super.getEstaDisponible() == true ? "Disponible, " : "No disponible, ") + super.getTipo() + ", Propietario: " + 
+				super.getPropietario().getNombre() + " "  + super.getPropietario().getApellido() + " Inquilino: " + inquilino.getNombre() + " " + inquilino.getApellido();
 	}
-	
-	
 }
