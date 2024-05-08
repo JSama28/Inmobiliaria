@@ -202,9 +202,11 @@ public class Inmobiliaria {
 		TipoDeOperacion tipo = seleccionarTipoDeOperacion();
 		Propietario propietario = seleccionarPropietario();
 
-		String idCasa = "C" + getCantidadDeElementos(departamentos);
+		//Inquilino inquilino = seleccionarInquilino();
+		
+		String idCasa = "C" + getCantidadDeElementos(casas);
 
-		Casa casa = new Casa(nombreCalle, numero, ciudad, precio, true, tipo, propietario, idCasa);
+		Casa casa = new Casa(nombreCalle, numero, ciudad, precio, true, tipo, propietario,  idCasa);
 		return casa;
 	}
 
@@ -231,7 +233,7 @@ public class Inmobiliaria {
 		String idDept = "D" + getCantidadDeElementos(departamentos);
 
 		Departamento departamento = new Departamento(nombreCalle, numero, numDept, ciudad, precio, true, tipo,
-				propietario, idDept);
+				propietario,idDept);
 		return departamento;
 	}
 
@@ -325,11 +327,38 @@ public class Inmobiliaria {
 
 		System.out.println("Dni del propietario: ");
 		Integer dni = teclado.nextInt();
-
-		Propietario propietario = new Propietario(nombre, apellido, dni, null, null);
+		
+		System.out.println("Email del propietario: ");
+		String email = teclado.next();
+		
+		System.out.println("Telefono del propietario: ");
+		String telefono = teclado.next();
+		Propietario propietario = new Propietario(nombre, apellido, dni, email, telefono);
 		return propietario;
 	}
 
+	public Inquilino seleccionarInquilino() {
+		Scanner teclado = new Scanner(System.in);
+
+		System.out.println("Nombre del inquilino: ");
+		String nombre = teclado.next();
+
+		System.out.println("Apellido del inquilino: ");
+		String apellido = teclado.next();
+
+		System.out.println("Dni del inquilino: ");
+		Integer dni = teclado.nextInt();
+		
+		System.out.println("Email del inquilino: ");
+		String email = teclado.next();
+		
+		System.out.println("Telefono del inquilino: ");
+		String telefono = teclado.next();
+
+		Inquilino inquilino = new Inquilino(nombre, apellido, dni, email, telefono, null);
+		return inquilino;
+	}
+	
 	public Boolean editarPropiedad(String idPropiedad) {
 
 		switch (idPropiedad.charAt(0)) {
@@ -825,7 +854,7 @@ public class Inmobiliaria {
 			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
 				if (casas[i] != null) {
 					Casa casa = casas[i];
-					String idCasa = casa.getIdCasa();
+					String idCasa = casa.getId();
 
 					if (propiedadAVender.equals(idCasa)) {
 						casa.setPropietario(propietarioCompraNuevo);
@@ -839,7 +868,7 @@ public class Inmobiliaria {
 				if (departamentos[i] != null) {
 					Departamento departamento = departamentos[i];
 
-					if (propiedadAVender.equals(departamento.getIdDep())) {
+					if (propiedadAVender.equals(departamento.getId())) {
 						departamento.setPropietario(propietarioCompraNuevo);
 						System.out.println("SE COMPLETO VENTA DE " + departamento.toString());
 					}
@@ -851,7 +880,7 @@ public class Inmobiliaria {
 				if (phs[i] != null) {
 					Ph ph = phs[i];
 
-					if (propiedadAVender.equals(ph.getIdPh())) {
+					if (propiedadAVender.equals(ph.getId())) {
 						ph.setPropietario(propietarioCompraNuevo);
 						System.out.println("SE COMPLETO VENTA DE " + ph.toString());
 					}
@@ -862,7 +891,7 @@ public class Inmobiliaria {
 				if (terrenos[i] != null) {
 					Terreno terreno = terrenos[i];
 
-					if (propiedadAVender.equals(terreno.getIdTerreno())) {
+					if (propiedadAVender.equals(terreno.getId())) {
 						terreno.setPropietario(propietarioCompraNuevo);
 						System.out.println("SE COMPLETO VENTA DE " + terreno.toString());
 					}
@@ -878,7 +907,7 @@ public class Inmobiliaria {
 			for (int i = 0; i < cantidadMaximaDePropiedades; i++) {
 				if (casas[i] != null) {
 					Casa casa = casas[i];
-					String idCasa = casa.getIdCasa();
+					String idCasa = casa.getId();
 
 					if (propiedadAAlquilar.equals(idCasa)) {
 						casa.setInquilino(inquilino);
@@ -894,7 +923,7 @@ public class Inmobiliaria {
 				if (departamentos[i] != null) {
 					Departamento departamento = departamentos[i];
 
-					if (propiedadAAlquilar.equals(departamento.getIdDep())) {
+					if (propiedadAAlquilar.equals(departamento.getId())) {
 						departamento.setInquilino(inquilino);
 						System.out.println("\nSE COMPLETO ALQUILER DEL DEPARTAMENTO: \n" + departamento.toString() + 
 						"\nINQUILINO: " + inquilino.toString()
@@ -908,7 +937,7 @@ public class Inmobiliaria {
 				if (phs[i] != null) {
 					Ph ph = phs[i];
 
-					if (propiedadAAlquilar.equals(ph.getIdPh())) {
+					if (propiedadAAlquilar.equals(ph.getId())) {
 						ph.setInquilino(inquilino);
 						System.out.println("\nSE COMPLETO ALQUILER DEL PH:  \n" + ph.toString() + 
 						"\nINQUILINO: " + inquilino.toString()

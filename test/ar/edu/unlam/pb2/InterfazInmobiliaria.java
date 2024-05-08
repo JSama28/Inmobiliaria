@@ -135,7 +135,7 @@ public class InterfazInmobiliaria {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				LocalDate fInicio = LocalDate.parse(fechaInicio, formatter);
 				LocalDate fFin = LocalDate.parse(fechaFin, formatter);
-				Inquilino inquilino = new Inquilino(nombreInq, apellidoInq, dniInq, emailInq, telefonoInq);
+				Inquilino inquilino = new Inquilino(nombreInq, apellidoInq, dniInq, emailInq, telefonoInq, null);
 				inmobiliariaActual.realizarAlquiler(propiedadAlquilada,inquilino, fechaInicio, fechaFin);
 				break;
 				

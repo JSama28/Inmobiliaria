@@ -59,14 +59,14 @@ public class pruebaUnitariaAutomatizada {
 
 	@Test
 	public void	queSePuedaDarDeAltaUnDepartamentoEnLaInmobiliaria() {
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
 		assertTrue(inmob.agregarDepartamento(dept1));
 	}
 	
 	@Test
 	public void	queSePuedanDarDeAltaDosDepartamentoEnLaInmobiliaria() {
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
-		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietario1,"D2");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
+		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietario1, "D2");
 		assertTrue(inmob.agregarDepartamento(dept1));
 		assertTrue(inmob.agregarDepartamento(dept2));
 
@@ -74,8 +74,8 @@ public class pruebaUnitariaAutomatizada {
 	
 	@Test
 	public void	queNoSePuedanDarDeAltaDosDepartamentoConUnaMismaDireccion() {
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
-		Departamento dept2 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D2");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
+		Departamento dept2 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1, "D2");
 		assertTrue(inmob.agregarDepartamento(dept1));
 		assertFalse(inmob.agregarDepartamento(dept2));
 	}
@@ -94,8 +94,8 @@ public class pruebaUnitariaAutomatizada {
 
 		@Test
 	public void	queSePuedaObtenerElValorPromedioDeLosDepartamentos() {
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
-		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 12.5, true, TipoDeOperacion.VENTA, propietario1,"D2");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
+		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 12.5, true, TipoDeOperacion.VENTA, propietario1, "D2");
 	
 		inmob.agregarDepartamento(dept1);
 		inmob.agregarDepartamento(dept2);
@@ -107,7 +107,7 @@ public class pruebaUnitariaAutomatizada {
 		@Test
 	public void	queLaBusquedaPorRangoDePrecioDeMeArrojeUnArrayNoNuloSiAplicanResultados() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 10.0, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 6.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 6.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
 		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
 		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietario1, "T1");
 		
@@ -125,7 +125,7 @@ public class pruebaUnitariaAutomatizada {
 	@Test
 	public void queLaBusquedaPorRangoDePrecioDeCasasMeArrojeUnArrayNuloSiNoAplicanResultados() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 10.0, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 6.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 6.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
 		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
 		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietario1, "T1");
 		
