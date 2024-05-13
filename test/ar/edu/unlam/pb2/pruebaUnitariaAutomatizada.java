@@ -140,4 +140,34 @@ public class pruebaUnitariaAutomatizada {
 		assertNull(inmob.mostrarTerrenosPorPrecio(13.0, 23.0));
 
 	}	
+	
+	 @Test
+	 public void queSePuedaTraerCasasPorPrecioOrdenado() {
+		 Casa casita1 = new Casa("ardoino", 123, "ramos", 15.5, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
+		 Casa casita2 = new Casa("monteagudo", 254, "temos", 12.5, true, TipoDeOperacion.VENTA, propietario1, "C1");
+		 
+		 inmob.agregarCasa(casita1);
+		 inmob.agregarCasa(casita2);
+		 Double price =  inmob.getCasasOrdenadasPorPrecio().get(0).getPrecio();
+		 assertTrue(12.5 == price);
+		 assertFalse(15.5 == price);
+	 }
+	 
+	 @Test
+	 public void queSePuedaTraerCasasPorUbicacionOrdenado() {
+		 Casa casita1 = new Casa("ardoino", 123, "tramos", 15.5, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
+		 Casa casita2 = new Casa("monteagudo", 254, "temos", 12.5, true, TipoDeOperacion.VENTA, propietario1, "C1");
+		 
+		 inmob.agregarCasa(casita1);
+		 inmob.agregarCasa(casita2);
+		 
+		 String ubic = inmob.getCasasOrdenadasPorUbicacion().get(0).getCiudad();
+		 assertTrue("temos" == ubic);
+		
+	 }
+	 
+	 
+	 
+	 
+	 
 }

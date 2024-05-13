@@ -35,4 +35,6 @@ public class Departamento extends Propiedad {
 				+ super.getPrecio() + ", esta " 	+ (super.getEstaDisponible() == true ? "Disponible, " : "No disponible, ") + super.getTipo() + ", Propietario: " + 
 				super.getPropietario().getNombre() + " "  + super.getPropietario().getApellido() /*+ " Inquilino: " + inquilino.getNombre() + " " + inquilino.getApellido()*/;
 	}
+	
+	
 }
