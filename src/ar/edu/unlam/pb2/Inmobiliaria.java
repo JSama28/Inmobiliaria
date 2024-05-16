@@ -853,4 +853,67 @@ public class Inmobiliaria {
 		return promedio;
 	}
 
+	public void getListadoPropiedadesEnVenta() {
+
+		System.out.println("\nPROPIEDADES EN VENTA:\n");
+
+		getListadoCasasEnVenta();
+		getListadoDepartamentosEnVenta();
+		getListadoPhsEnVenta();
+		getListadoTerrenosEnVenta();
+
+	}
+
+	public ArrayList<Casa> getListadoCasasEnVenta() {
+		ArrayList<Casa> casasEnVenta= new ArrayList<Casa>(casas);
+
+		for(Casa casita : casas) {
+			if(casita.getTipo().equals(TipoDeOperacion.VENTA)){
+				casasEnVenta.add(casita);
+				System.out.println(casita.toString());
+			}
+		}
+		System.out.println("NO HAY MAS CASAS A MOSTRAR.");
+		return (casasEnVenta.size() == 0) ? null : casasEnVenta;
+	}
+
+	public ArrayList<Departamento> getListadoDepartamentosEnVenta() {
+		ArrayList<Departamento> deptsEnVenta= new ArrayList<Departamento>(departamentos);
+
+		for(Departamento depto : departamentos) {
+			if(depto.getTipo().equals(TipoDeOperacion.VENTA)){
+				deptsEnVenta.add(depto);
+				System.out.println(depto.toString());
+			}
+		}
+		System.out.println("NO HAY MAS DEPARTAMENTOS A MOSTRAR.");
+		return (deptsEnVenta.size() == 0) ? null : deptsEnVenta;
+	}
+
+	public ArrayList<Ph> getListadoPhsEnVenta() {
+		ArrayList<Ph> phsEnVenta= new ArrayList<Ph>(phs);
+
+		for(Ph ph : phs) {
+			if(ph.getTipo().equals(TipoDeOperacion.VENTA)){
+				phsEnVenta.add(ph);
+				System.out.println(ph.toString());
+			}
+		}		
+		System.out.println("NO HAY MAS PHS A MOSTRAR.");
+		return (phsEnVenta.size() == 0) ? null : phsEnVenta;
+	}
+
+	public ArrayList<Terreno> getListadoTerrenosEnVenta() {
+		ArrayList<Terreno> terrenosEnVenta= new ArrayList<Terreno>(terrenos);
+
+		for(Terreno terrenito : terrenos) {
+			if(terrenito.getTipo().equals(TipoDeOperacion.VENTA)){
+				terrenosEnVenta.add(terrenito);
+				System.out.println(terrenito.toString());
+			}
+		}
+		System.out.println("NO HAY MAS TERENOS A MOSTRAR.");
+		return (terrenosEnVenta.size() == 0) ? null : terrenosEnVenta;
+	}
+
 }
