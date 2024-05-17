@@ -1,5 +1,7 @@
 package ar.edu.unlam.pb2;
 
+import java.util.Objects;
+
 public class Cliente {
 	
 	private String nombre;
@@ -55,6 +57,17 @@ public class Cliente {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getDni());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Cliente cliente = (Cliente) obj;
+		return cliente.getDni().equals(getDni());
 	}
 
 	

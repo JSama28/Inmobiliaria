@@ -90,6 +90,7 @@ public class Propiedad {
 	public void setIdCasa(String id) {
 		this.id = id;
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(getCalle(), getNumero(), getCiudad(), getPrecio());
