@@ -10,7 +10,6 @@ public class Ph extends Propiedad {
 		super(calle, numero, ciudad, precio, estaDisponible, tipo, propietario, id);
 		
 		this.numPh = numPh;
-//		this.inquilino = inquilino;
 	}
 
 	public String getNumPh() {

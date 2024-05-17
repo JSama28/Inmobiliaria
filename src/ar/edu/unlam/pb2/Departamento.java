@@ -10,7 +10,6 @@ public class Departamento extends Propiedad {
 		super(calle, numero, ciudad, precio, estaDisponible, tipo, propietario, id);
 		
 		this.numDep = numDep;
-//		this.inquilino = inquilino;
 	}
 
 	public String getNumDep() {

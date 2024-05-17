@@ -356,8 +356,10 @@ public class Inmobiliaria {
 				String id = ph.getId();
 
 				if (idPropiedad.equals(id)) {
+					
 					System.out.println(ph.toString());
 					Ph phEditado = crearPh(id);
+					
 					return phs.add(phEditado);
 				}
 			}
@@ -367,10 +369,11 @@ public class Inmobiliaria {
 				String id = terrenito.getId();
 
 				if (idPropiedad.equals(id)) {
+					
 					System.out.println(terrenito.toString());
 					Terreno terrenoEditado = crearTerreno(id);
+					
 					return terrenos.add(terrenoEditado);
-
 				}
 			}
 		}
@@ -411,50 +414,25 @@ public class Inmobiliaria {
 
 		System.out.println("\nCASAS:");
 		for (Casa casita : casasOrdenadas) {
-			if (casita != null) {
 				System.out.println(casita.toString());
-			} else {
-				break;
-			}
 		}
 
 		System.out.println("\nDEPARTAMENTOS:");
 		for (Departamento depts : deptsOrdenados) {
-			if (depts != null) {
 				System.out.println(depts.toString());
-			}else {
-				break;
-			}
 		}
 
 		System.out.println("\nPHS: ");
 		for (Ph phs : phsOrdenados) {
-			if (phs != null) {
 				System.out.println(phs.toString());
-			}
 		}
 
 		System.out.println("\nTERRENOS: ");
 		for (Terreno terrenos : terrenosOrdenadas) {
-			if (terrenos != null) {
 				System.out.println(terrenos.toString());
-			}
 		}
-
+		
 		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
-	}
-
-	public Integer getCantidadDeElementos(Object[] array) {
-		Integer cantidad = 0;
-
-		for (int i = 0; i < array.length; i++) {
-			if (array[i] != null) {
-				cantidad++;
-			} else {
-				break;
-			}
-		}
-		return cantidad;
 	}
 
 	public ArrayList<Casa> getCasasOrdenadasPorPrecio() {
@@ -596,14 +574,15 @@ public class Inmobiliaria {
 
 	public ArrayList<Casa> getCasasOrdenadasPorUbicacion() {
 		ArrayList<Casa> casasEnUbicacion = new ArrayList<Casa>(casas);
-
+	
 		Collections.sort(casasEnUbicacion, (a, b) -> {
 			String ubicacionA = ((Casa) a).getCiudad();
 			String ubicacionB = ((Casa) b).getCiudad();
 			return ubicacionA.compareTo(ubicacionB);
+			
 		});
-
-		return casasEnUbicacion;
+		System.out.println("\nCASAS DENTRO DEL RANGO DE UBICACION: " + casasEnUbicacion.size());
+		return casasEnUbicacion.size() > 0 ? casasEnUbicacion : null;
 	}
 
 	public ArrayList<Departamento> getDepartamentosOrdenadosPorUbicacion() {
@@ -614,7 +593,7 @@ public class Inmobiliaria {
 			String ubicacionB = ((Departamento) b).getCiudad();
 			return ubicacionA.compareTo(ubicacionB);
 		});
-
+		System.out.println("\nDEPARTAMENTOS DENTRO DEL RANGO DE UBICACION: " + departamentosEnUbicacion.size());
 		return departamentosEnUbicacion;
 	}
 
@@ -626,7 +605,7 @@ public class Inmobiliaria {
 			String ubicacionB = ((Ph) b).getCiudad();
 			return ubicacionA.compareTo(ubicacionB);
 		});
-
+		System.out.println("\nPHS DENTRO DEL RANGO DE UBICACION: " + phsEnUbicacion.size());
 		return phsEnUbicacion;
 	}
 
@@ -638,7 +617,7 @@ public class Inmobiliaria {
 			String ubicacionB = ((Terreno) b).getCiudad();
 			return ubicacionA.compareTo(ubicacionB);
 		});
-
+		System.out.println("\nTERRENOS DENTRO DEL RANGO DE UBICACION: " + terrenosEnUbicacion.size());
 		return terrenosEnUbicacion;
 	}
 
@@ -717,16 +696,13 @@ public class Inmobiliaria {
 		for (Casa casita : casasOrdenadas) {
 			if (casita != null) {
 				System.out.println(casita.toString());
-			} else {
-				break;
-			}
+			} 
 		}
 
 		System.out.println("\nDEPARTAMENTOS:");
 		for (Departamento depts : deptsOrdenados) {
 			if (depts != null) {
 				System.out.println(depts.toString());
-
 			}
 		}
 
@@ -743,7 +719,6 @@ public class Inmobiliaria {
 				System.out.println(terrenos.toString());
 			}
 		}
-
 		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
 	}
 
@@ -854,14 +829,12 @@ public class Inmobiliaria {
 	}
 
 	public void getListadoPropiedadesEnVenta() {
-
 		System.out.println("\nPROPIEDADES EN VENTA:\n");
 
 		getListadoCasasEnVenta();
 		getListadoDepartamentosEnVenta();
 		getListadoPhsEnVenta();
 		getListadoTerrenosEnVenta();
-
 	}
 
 	public ArrayList<Casa> getListadoCasasEnVenta() {
@@ -915,5 +888,66 @@ public class Inmobiliaria {
 		System.out.println("NO HAY MAS TERENOS A MOSTRAR.");
 		return (terrenosEnVenta.size() == 0) ? null : terrenosEnVenta;
 	}
+	
+	public void getListadoPropiedadesEnAlquiler() {
+		System.out.println("\nPROPIEDADES EN ALQUILER:\n");
 
+		getListadoCasasEnAlquiler();
+		getListadoDepartamentosEnAlquiler();
+		getListadoPhsEnAlquiler();
+		getListadoTerrenosEnAlquiler();
+	}
+	
+	public ArrayList<Casa> getListadoCasasEnAlquiler() {
+		ArrayList<Casa> casasEnAlquiler= new ArrayList<Casa>(casas);
+
+		for(Casa casita : casas) {
+			if(casita.getTipo().equals(TipoDeOperacion.ALQUILER)){
+				casasEnAlquiler.add(casita);
+				System.out.println(casita.toString());
+			}
+		}
+		System.out.println("NO HAY MAS TERENOS A MOSTRAR.");
+		return (casasEnAlquiler.size() == 0) ? null : casasEnAlquiler;
+	}
+	
+	public ArrayList<Departamento> getListadoDepartamentosEnAlquiler() {
+		ArrayList<Departamento> deptsEnAlquiler= new ArrayList<Departamento>(departamentos);
+
+		for(Departamento depto : departamentos) {
+			if(depto.getTipo().equals(TipoDeOperacion.ALQUILER)){
+				deptsEnAlquiler.add(depto);
+				System.out.println(depto.toString());
+			}
+		}
+		System.out.println("NO HAY MAS DEPARTAMENTOS A MOSTRAR.");
+		return (deptsEnAlquiler.size() == 0) ? null : deptsEnAlquiler;
+	}
+
+	public ArrayList<Ph> getListadoPhsEnAlquiler() {
+		ArrayList<Ph> phsEnAlquiler= new ArrayList<Ph>(phs);
+
+		for(Ph ph : phs) {
+			if(ph.getTipo().equals(TipoDeOperacion.ALQUILER)){
+				phsEnAlquiler.add(ph);
+				System.out.println(ph.toString());
+			}
+		}		
+		System.out.println("NO HAY MAS PHS A MOSTRAR.");
+		return (phsEnAlquiler.size() == 0) ? null : phsEnAlquiler;
+	}
+
+	public ArrayList<Terreno> getListadoTerrenosEnAlquiler() {
+		ArrayList<Terreno> terrenosEnAlquiler= new ArrayList<Terreno>(terrenos);
+
+		for(Terreno terrenito : terrenos) {
+			if(terrenito.getTipo().equals(TipoDeOperacion.ALQUILER)){
+				terrenosEnAlquiler.add(terrenito);
+				System.out.println(terrenito.toString());
+			}
+		}
+		System.out.println("NO HAY MAS TERENOS A MOSTRAR.");
+		return (terrenosEnAlquiler.size() == 0) ? null : terrenosEnAlquiler;
+	}
+	
 }

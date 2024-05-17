@@ -2,21 +2,21 @@ package ar.edu.unlam.pb2;
 
 public class Inquilino extends Cliente {
 
-	private Propiedad id;
+	private Propiedad propiedad;
 	
 	
-	public Inquilino(String nombre, String apellido, Integer dni, String email, String telefono, Propiedad id) {
+	public Inquilino(String nombre, String apellido, Integer dni, String email, String telefono, Propiedad propiedad) {
 		super(nombre, apellido, dni, email, telefono);
 
-		this.id = id;
+		this.propiedad = propiedad;
 	}
 
-	public Propiedad getId() {
-		return id;
+	public Propiedad getPropiedad() {
+		return propiedad;
 	}
 
 
-	public void setId(Propiedad id) {
-		this.id = id;
+	public void setId(Propiedad propiedad) {
+		this.propiedad = propiedad;
 	}
 }

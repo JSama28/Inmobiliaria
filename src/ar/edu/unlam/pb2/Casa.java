@@ -8,8 +8,6 @@ public class Casa extends Propiedad{
 	public Casa(String calle, Integer numero, String ciudad, Double precio, Boolean estaDisponible,
 			TipoDeOperacion tipo, Propietario propietario, String id) {
 		super(calle, numero, ciudad, precio, estaDisponible, tipo, propietario, id);
-		
-		this.inquilino = inquilino;
 	}
 	
 	public Inquilino getInquilino() {

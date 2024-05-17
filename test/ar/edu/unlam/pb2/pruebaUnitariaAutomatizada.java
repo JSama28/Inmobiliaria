@@ -69,7 +69,6 @@ public class pruebaUnitariaAutomatizada {
 		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietario1, "D2");
 		assertTrue(inmob.agregarDepartamento(dept1));
 		assertTrue(inmob.agregarDepartamento(dept2));
-
 	}
 
 	@Test
@@ -102,10 +101,10 @@ public class pruebaUnitariaAutomatizada {
 
 		assertTrue(inmob.valorPromedioDepartamentos().equals(7.0));
 		assertFalse(inmob.valorPromedioDepartamentos().equals(12.0));
-
 	}
+	
 	@Test
-	public void	queLaBusquedaPorRangoDePrecioDeMeArrojeUnArrayNoNuloSiAplicanResultados() {
+	public void	queLaBusquedaPorRangoDePrecioDeMeArrojeUnaListaNoNuloSiAplicanResultados() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 10.0, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
 		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 6.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
 		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
@@ -123,7 +122,7 @@ public class pruebaUnitariaAutomatizada {
 	}
 
 	@Test
-	public void queLaBusquedaPorRangoDePrecioDeCasasMeArrojeUnArrayNuloSiNoAplicanResultados() {
+	public void queLaBusquedaPorRangoDePrecioDeCasasMeArrojeUnaListaNuloSiNoAplicanResultados() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 10.0, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
 		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 6.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
 		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
@@ -138,7 +137,6 @@ public class pruebaUnitariaAutomatizada {
 		assertNull(inmob.mostrarDepartamentosPorPrecio(20.0, 35.0));
 		assertNull(inmob.mostrarPhsPorPrecio(10.0, 25.0));
 		assertNull(inmob.mostrarTerrenosPorPrecio(13.0, 23.0));
-
 	}	
 
 	@Test
@@ -163,7 +161,6 @@ public class pruebaUnitariaAutomatizada {
 
 		String ubic = inmob.getCasasOrdenadasPorUbicacion().get(0).getCiudad();
 		assertTrue("temos" == ubic);
-
 	}
 
 	@Test

@@ -1,50 +1,52 @@
 package ar.edu.unlam.pb2;
 
-public class Propietario extends Cliente{
-	private Casa casa[];
-	private Departamento departamento[];
-	private Ph ph[];
-	private Terreno terreno[];
-	private final Integer cantidadMaximaDePropiedades = 100;
+import java.util.ArrayList;
 
+public class Propietario extends Cliente{
+	private ArrayList<Casa> casas;
+	private ArrayList<Departamento> departamentos;
+	private ArrayList<Ph> phs;
+	private ArrayList<Terreno> terrenos;
+	
 	public Propietario(String nombre, String apellido, Integer dni, String email, String telefono) {
 		super(nombre, apellido, dni, email, telefono);
 	
-		this.casa = new Casa[cantidadMaximaDePropiedades];
-		this.departamento = new Departamento[cantidadMaximaDePropiedades];
-		this.ph = new Ph[cantidadMaximaDePropiedades];
-		this.terreno = new Terreno[cantidadMaximaDePropiedades];	
+		this.casas = new ArrayList<Casa>();
+		this.departamentos = new ArrayList<Departamento>();
+		this.phs = new ArrayList<Ph>();
+		this.terrenos = new ArrayList<Terreno>();	
 	}
 
-	public Casa[] getCasa() {
-		return casa;
+	public ArrayList<Casa> getCasas() {
+		return casas;
 	}
 
-	public void setCasa(Casa[] casa) {
-		this.casa = casa;
+	public void setCasas(ArrayList<Casa> casas) {
+		this.casas = casas;
 	}
 
-	public Departamento[] getDepartamento() {
-		return departamento;
+	public ArrayList<Departamento> getDepartamentos() {
+		return departamentos;
 	}
 
-	public void setDepartamento(Departamento[] departamento) {
-		this.departamento = departamento;
+	public void setDepartamentos(ArrayList<Departamento> departamentos) {
+		this.departamentos = departamentos;
 	}
 
-	public Ph[] getPh() {
-		return ph;
+	public ArrayList<Ph> getPhs() {
+		return phs;
 	}
 
-	public void setPh(Ph[] ph) {
-		this.ph = ph;
+	public void setPhs(ArrayList<Ph> phs) {
+		this.phs = phs;
 	}
 
-	public Terreno[] getTerreno() {
-		return terreno;
+	public ArrayList<Terreno> getTerrenos() {
+		return terrenos;
 	}
 
-	public void setTerreno(Terreno[] terreno) {
-		this.terreno = terreno;
+	public void setTerrenos(ArrayList<Terreno> terrenos) {
+		this.terrenos = terrenos;
 	}
+
 }
