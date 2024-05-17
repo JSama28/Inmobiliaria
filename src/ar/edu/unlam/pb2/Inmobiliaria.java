@@ -13,8 +13,7 @@ public class Inmobiliaria {
 	private String eMail;
 	private String telefono;
 	private HashSet<Propiedad> propiedades;
-	private Cliente clientes[];
-	private final Integer cantidadMaximaDeClientes = 100;
+	private HashSet<Cliente> clientes;
 
 	public Inmobiliaria(String nombre, String direccion, String eMail, String telefono) {
 		this.nombre = nombre;
@@ -22,8 +21,7 @@ public class Inmobiliaria {
 		this.eMail = eMail;
 		this.telefono = telefono;
 		this.propiedades = new HashSet<Propiedad>();
-		this.clientes = new Cliente[cantidadMaximaDeClientes];
-
+		this.clientes = new HashSet<Cliente>();
 	}
 
 	public String getNombre() {
@@ -69,13 +67,7 @@ public class Inmobiliaria {
 	}
 
 	public Boolean agregarCliente(Cliente nuevoCliente) {
-		for (int i = 0; i < cantidadMaximaDeClientes; i++) {
-			if (clientes[i] == null) {
-				clientes[i] = nuevoCliente;
-				return true;
-			}
-		}
-		return false;
+		return clientes.add(nuevoCliente);
 	}
 
 	public Boolean agregarPropiedad() {
