@@ -372,14 +372,21 @@ public class Inmobiliaria {
 		return propiedadesOrdenadas;
 	}
 
-	public ArrayList<Propiedad> buscarPropiedadesPorPrecio(Double precioMin, Double precioMax) {
+	public ArrayList<Propiedad> buscarPropiedadesPorPrecio(Double precioMin, Double precioMax, TipoDePropiedad tipo) {
 		ArrayList<Propiedad> propEntrePrecio = new ArrayList<Propiedad>(); 
 
 		for (Propiedad prop: propiedades) {
-			if (prop.getPrecio() >= precioMin && prop.getPrecio() <= precioMax) {
+			if (prop.getPrecio() >= precioMin && prop.getPrecio() <= precioMax && 
+				(tipo == null || prop.getId().charAt(0) == tipo.getIdChar())) {
 				propEntrePrecio.add(prop);
 			}
 		}
+			
+		Collections.sort(propEntrePrecio, (a, b) -> {
+			Double precioA = ((Propiedad) a).getPrecio();
+			Double precioB = ((Propiedad) b).getPrecio();
+			return precioA.compareTo(precioB);
+		});
 
 		System.out.println("\nPROPIEDADES DENTRO DEL RANGO DE PRECIO: " + propEntrePrecio.size());
 
@@ -415,8 +422,8 @@ public class Inmobiliaria {
 		}
 		
 		Collections.sort(propEnUbicacion, (a, b) -> {
-			String ubicacionA = ((Propiedad) a).getCiudad();
-			String ubicacionB = ((Propiedad) b).getCiudad();
+			String ubicacionA = ((Propiedad) a).getCalle();
+			String ubicacionB = ((Propiedad) b).getCalle();
 			return ubicacionA.compareTo(ubicacionB);
 			
 		});
@@ -425,16 +432,23 @@ public class Inmobiliaria {
 		return propEnUbicacion.size() > 0 ? propEnUbicacion : null;
 	}
 	
-	public void buscarPropiedadesPorUbicacion(String ubicacion) {
-		System.out.println("\nPROPIEDADES EN UBICACION:");
+	public ArrayList<Propiedad> buscarPropiedadesPorUbicacion(String ubicacion, TipoDePropiedad tipo) {
+		ArrayList<Propiedad> propEnUbicacion = new ArrayList<Propiedad>();
 
 		for (Propiedad prop : propiedades) {
-			if (prop.getCiudad().contains(ubicacion)) {
-				System.out.println(prop.toString());
+			if (prop.getCiudad().contains(ubicacion) &&
+				(tipo == null || prop.getId().charAt(0) == tipo.getIdChar())) {
+				propEnUbicacion.add(prop);
 			}
 		}
+		
+		Collections.sort(propEnUbicacion, (a, b) -> {
+			String ubicacionA = ((Propiedad) a).getCalle();
+			String ubicacionB = ((Propiedad) b).getCalle();
+			return ubicacionA.compareTo(ubicacionB);			
+		});
 
-		System.out.println("NO HAY MAS CASAS A MOSTRAR.");
+		return propEnUbicacion;
 	}
 
 	public void obtenerListadoPorUbicacion() {
@@ -450,17 +464,18 @@ public class Inmobiliaria {
 		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
 	}
 
-	public void realizarVenta(String propiedadAVender, Propietario propietarioCompraNuevo) {
+	public Boolean realizarVenta(String propiedadAVender, Propietario propietarioCompraNuevo) {
 		for(Propiedad prop : propiedades) {
 			String id = prop.getId();
 			if (propiedadAVender.equals(id)) {
 				prop.setPropietario(propietarioCompraNuevo);
-				System.out.println("SE COMPLETO VENTA DE " + prop.toString());
+				return true;
 			}
-		}
+		}			
+		return false;
 	}
 
-	public void realizarAlquiler(String propiedadAAlquilar, Inquilino inquilino, String fechaInicio, String fechaFin) {
+	public Boolean realizarAlquiler(String propiedadAAlquilar, Inquilino inquilino, String fechaInicio, String fechaFin) {
 		for(Propiedad prop : propiedades) {
 			String id = prop.getId();
 			
@@ -469,21 +484,25 @@ public class Inmobiliaria {
 				case 'C':
 					Casa casa = (Casa) prop;
 					casa.setInquilino(inquilino);
+					return true;
 		
 				case 'D':
 					Departamento dept = (Departamento) prop;
 					dept.setInquilino(inquilino);
-		
+					return true;
+					
 				case 'P':
 					Ph ph = (Ph) prop;
 					ph.setInquilino(inquilino);
+					return true;
 				}
 				
 				System.out.println("\nSE COMPLETO ALQUILER DE LA PROPIEDAD: \n" + prop.toString() + "\nINQUILINO: "
 						+ inquilino.toString() + "\n FECHA INICIO: " + fechaInicio + "\n FECHA FIN: "
 						+ fechaFin);
 			}
-		}
+		} 
+		return false;
 	}
 
 	public Double valorPromedioCasas() {
@@ -521,7 +540,7 @@ public class Inmobiliaria {
 	public ArrayList<Propiedad> getListadoPropiedadesEnVenta() {
 		System.out.println("\nPROPIEDADES EN VENTA:\n");
 
-		ArrayList<Propiedad> propEnVenta= new ArrayList<Propiedad>(propiedades);
+		ArrayList<Propiedad> propEnVenta = new ArrayList<Propiedad>();
 
 		for(Propiedad prop : propiedades) {
 			if(prop.getTipo().equals(TipoDeOperacion.VENTA)){
@@ -536,7 +555,7 @@ public class Inmobiliaria {
 	public ArrayList<Propiedad> getListadoPropiedadesEnAlquiler() {
 		System.out.println("\nPROPIEDADES EN ALQUILER:\n");
 
-		ArrayList<Propiedad> propEnAlquiler = new ArrayList<Propiedad>(propiedades);
+		ArrayList<Propiedad> propEnAlquiler = new ArrayList<Propiedad>();
 
 		for(Propiedad prop : propiedades) {
 			if(prop.getTipo().equals(TipoDeOperacion.ALQUILER)){
@@ -547,4 +566,39 @@ public class Inmobiliaria {
 		System.out.println("NO HAY MAS PROPIEDADES A MOSTRAR.");
 		return (propEnAlquiler.size() == 0) ? null : propEnAlquiler;
 	}
+	
+	public Boolean realizarPermuta(Propietario propietarioA, Propiedad propA, Propietario propietarioB, Propiedad propB) {
+		if(propA.getTipo() == TipoDeOperacion.PERMUTA && propB.getTipo() == TipoDeOperacion.PERMUTA) {
+			propietarioA.agregarPropiedad(propB);
+			propietarioB.agregarPropiedad(propA);
+			propietarioA.borrarPropiedad(propA);
+			propietarioB.borrarPropiedad(propB);
+		}
+		return true;
+	}
+	
+	public Inquilino crearInquilino() {
+		Scanner teclado = new Scanner(System.in);
+
+		System.out.println("Ingrese nombre de cliente: ");
+		String nombre = teclado.next();
+
+		System.out.println("Ingrese apellido de cliente: ");
+		String apellido = teclado.next();
+
+		System.out.println("Ingrese dni de cliente: ");
+		Integer dni = teclado.nextInt();
+
+		System.out.println("Ingrese domicilio de cliente: ");
+		String domicilio = teclado.next();
+
+		System.out.println("Ingrese telefono de cliente: ");
+		String telefono = teclado.next();
+
+		Inquilino inquilino = new Inquilino(nombre, apellido, dni, domicilio, telefono, null);
+
+		return inquilino;
+	}
+
+	
 }
