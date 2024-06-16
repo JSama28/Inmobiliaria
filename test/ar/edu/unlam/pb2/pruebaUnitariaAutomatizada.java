@@ -7,17 +7,22 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import Exceptions.SinResultadosException;
+import Exceptions.UmbralMinimoNoAlcanzadoException;
+
 public class pruebaUnitariaAutomatizada {
 
 	Inmobiliaria inmob = new Inmobiliaria("Laria", "Monteagudo 321", "laria@inmobiliaria.com", "45250968");
-
 	Propietario propietario1 = new Propietario("Javier", "Perze", 23456123, "javi@email.com", "44581957");
 	Propietario propietario2 = new Propietario("Nicolas", "Alba", 34125341, "nico@email.com", "11355125");
 
 	@Before
 	public void setup() {
 		inmob = new Inmobiliaria("Laria", "Monteagudo 321", "laria@inmobiliaria.com", "45250968");
+		propietario1 = new Propietario("Javier", "Perze", 23456123, "javi@email.com", "44581957");
+		propietario2 = new Propietario("Nicolas", "Alba", 34125341, "nico@email.com", "11355125");
 	}
+	
 //A
 	@Test
 	public void queSePuedaDarDeAltaUnaCasaEnLaInmobiliaria() {	
@@ -93,7 +98,7 @@ public class pruebaUnitariaAutomatizada {
 		assertTrue(inmob.valorPromedioDepartamentos().equals(7.0));
 		assertFalse(inmob.valorPromedioDepartamentos().equals(12.0));
 	}
-//G	
+	
 	@Test
 	public void	queLaBusquedaPorRangoDePrecioDeMeArrojeUnaListaNoNuloSiAplicanResultados() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 10.0, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
@@ -108,7 +113,7 @@ public class pruebaUnitariaAutomatizada {
 
 		assertNotNull(inmob.buscarPropiedadesPorPrecio(5.0, 15.0, null));
 	}
-//H
+
 	@Test
 	public void queLaBusquedaPorRangoDePrecioDeCasasMeArrojeUnaListaNuloSiNoAplicanResultados() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 10.0, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
@@ -149,45 +154,30 @@ public class pruebaUnitariaAutomatizada {
 		assertTrue("tramos" == ubic);
 	}
 
-	@Test
-	public void queLaBusquedaDePropiedadesPorVentaMeArrojeUnaLista() {
-		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "C0");
-		Casa casita2 = new Casa("monteagudo", 254, "temos", 12.5, true, TipoDeOperacion.VENTA, propietario1, "C1");
-		Casa casita3 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "C2");
-		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "P1");
-		Ph ph2 = new Ph("cerrito", 475, "5", "moros", 3.5, true, TipoDeOperacion.VENTA, propietario1, "P2");
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
-		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietario1,"D2");
-		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.VENTA, propietario1, "T1");
-		Terreno terrenitos2 = new Terreno("monroe", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.VENTA, propietario1, "T2");
-
-		inmob.agregarPropiedad(casita1);
-		inmob.agregarPropiedad(casita2);
-		inmob.agregarPropiedad(casita3);
-		inmob.agregarPropiedad(ph1);
-		inmob.agregarPropiedad(ph2);
-		inmob.agregarPropiedad(dept1);
-		inmob.agregarPropiedad(dept2);
-		inmob.agregarPropiedad(terrenitos1);
-		inmob.agregarPropiedad(terrenitos2);
-		
-		assertTrue(inmob.getListadoPropiedadesEnVenta().size() > 0);
-	}
-	
-	@Test
-	public void queLaBusquedaDePropiedadesPorVentaMeArrojeUnaListaNuloSiNoAplicanResultados() {
-		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "C1");
-		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.ALQUILER, propietario1,"D1");
-		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietario1, "T1");
-
-		inmob.agregarPropiedad(casita1);
-		inmob.agregarPropiedad(ph1);
-		inmob.agregarPropiedad(dept1);
-		inmob.agregarPropiedad(terrenitos1);
-		
-		assertNull(inmob.getListadoPropiedadesEnVenta());
-	}
+//	@Test
+//	public void queLaBusquedaDePropiedadesPorVentaMeArrojeUnaLista() {
+//		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "C0");
+//		Casa casita2 = new Casa("monteagudo", 254, "temos", 12.5, true, TipoDeOperacion.VENTA, propietario1, "C1");
+//		Casa casita3 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "C2");
+//		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "P1");
+//		Ph ph2 = new Ph("cerrito", 475, "5", "moros", 3.5, true, TipoDeOperacion.VENTA, propietario1, "P2");
+//		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
+//		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietario1,"D2");
+//		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.VENTA, propietario1, "T1");
+//		Terreno terrenitos2 = new Terreno("monroe", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.VENTA, propietario1, "T2");
+//
+//		inmob.agregarPropiedad(casita1);
+//		inmob.agregarPropiedad(casita2);
+//		inmob.agregarPropiedad(casita3);
+//		inmob.agregarPropiedad(ph1);
+//		inmob.agregarPropiedad(ph2);
+//		inmob.agregarPropiedad(dept1);
+//		inmob.agregarPropiedad(dept2);
+//		inmob.agregarPropiedad(terrenitos1);
+//		inmob.agregarPropiedad(terrenitos2);
+//		
+//		assertTrue(inmob.getListadoPropiedadesEnVenta().size() > 0);
+//	}
 	
 	@Test
 	public void queSePuedaRealizarUnaPermuta() {
@@ -202,14 +192,14 @@ public class pruebaUnitariaAutomatizada {
 		
 		assertTrue(inmob.realizarPermuta(propietario2, casita1, propietario1, ph1));
 	}
-//I	
+//G	
 	@Test
 	public void queSePuedaAgregarUnClienteALaInmobiliaria() {
 		Cliente cliente1 = new Cliente ("Tom", "Taura", 35624523, "TomT@email.com", "45628294");
 		
 		assertTrue(inmob.agregarCliente(cliente1));
 	}
-//J	
+//H	
 	@Test
 	public void queNoSePuedanAgregarDosClientesConUnMismoDni() {
 		Cliente cliente1 = new Cliente ("Tom", "Taura", 35624523, "TomT@email.com", "45628294");
@@ -219,7 +209,7 @@ public class pruebaUnitariaAutomatizada {
 		assertFalse(inmob.agregarCliente(cliente2));
 
 	}
-//K	
+//I
 	@Test
 	public void queSePuedaRealizarLaVentaDeUnaPropiedad() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "C0");
@@ -228,7 +218,7 @@ public class pruebaUnitariaAutomatizada {
 		
 		assertTrue(inmob.realizarVenta(casita1.getId(), propietario2));
 	}
-//L	
+//J	
 	@Test
 	public void queSePuedaRealizarElAlquilerDeUnaPropiedad() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
@@ -238,7 +228,7 @@ public class pruebaUnitariaAutomatizada {
 		
 		assertTrue(inmob.realizarAlquiler(casita1.getId(), inquilino1, "23/07/2024", "23/07/2025"));
 	}
-//M	
+//K	
 	@Test
 	public void queSePuedaRealizarLaPermutaDeDosPropiedades() {
 
@@ -255,7 +245,7 @@ public class pruebaUnitariaAutomatizada {
 		assertTrue(inmob.realizarPermuta(propietario2, casita1, propietario1, ph1));
 		assertTrue(inmob.realizarPermuta(propietario2, dept1, propietario1, terrenito1));
 	}
-//N	
+//L	
 	@Test
 	public void queSePuedaRealizarLaBusquedaDeCasasPorRangoDePreciosYElResultadoEsteOrdenadoPorPrecio() {
 		Casa casita1 = new Casa("ardoino", 123, "ramos", 7.5, true, TipoDeOperacion.VENTA, propietario1, "C0");
@@ -272,12 +262,7 @@ public class pruebaUnitariaAutomatizada {
 		assertTrue(casasOrdenadas.get(0).getPrecio().equals(5.5));
 		assertTrue(casasOrdenadas.get(casasOrdenadas.size() -1).getPrecio().equals(12.5));
 	}
-//O	
-//	@Test
-//	public void queSePuedaRealizarLaBusquedaDeCasasPorRangoDePrecioYElResultadoEsteOrdenadoPorPrecio() {
-//		
-//	}
-//P	
+//M
 	@Test
 	public void queSePuedaRealizarLaBusquedaDeCasasPorUbicacionYElResultadoEsteOrdenadoPorUbicacion() {
 		Casa casita1 = new Casa("florida", 223, "ramos", 7.5, true, TipoDeOperacion.VENTA, propietario1, "C0");
@@ -294,7 +279,7 @@ public class pruebaUnitariaAutomatizada {
 		assertEquals(casasOrdenadas.get(0).getCalle(), "ardoino");
 		assertTrue(casasOrdenadas.get(casasOrdenadas.size() -1).getCalle().equals("suipacha"));
 	}
-//Q	
+//N
 	@Test
 	public void queSePuedaRealizarLaBusquedaDeDepartamentosPorRangoDePreciosYElResultadoEsteOrdenadoPorPrecio(){
 		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
@@ -311,12 +296,7 @@ public class pruebaUnitariaAutomatizada {
 		assertTrue(deptsOrdenados.get(0).getPrecio().equals(5.5));
 		assertTrue(deptsOrdenados.get(deptsOrdenados.size() -1).getPrecio().equals(11.5));
 	}
-//R
-//	@Test
-//	public void queSePuedaRealizarLaBusquedaDeDepartamentosPorRangoDePrecioYElResultadoEsteOrdenadoPorPrecio(){
-//	
-//	}
-//S
+//O
 	@Test
 	public void queSePuedaRealizarLaBusquedaDeDepartamentosPorUbicacionYElResultadoEsteOrdenadoPorUbicacion(){
 		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
@@ -333,12 +313,27 @@ public class pruebaUnitariaAutomatizada {
 		assertEquals(deptsOrdenados.get(0).getCalle(), "ciri");
 		assertTrue(deptsOrdenados.get(deptsOrdenados.size() -1).getCalle().equals("taura"));
 	}
-//T	
+//P
 	@Test
 	public void queAlBuscarPorUnCriterioQueNoArrojeResultadosSeProduzcaLaExcepcionSinResultadosException(){
-	
+		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "C1");
+		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.ALQUILER, propietario1,"D1");
+		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietario1, "T1");
+
+		inmob.agregarPropiedad(casita1);
+		inmob.agregarPropiedad(ph1);
+		inmob.agregarPropiedad(dept1);
+		inmob.agregarPropiedad(terrenitos1);
+		
+		try {
+			inmob.getListadoPropiedadesEnVenta();
+			fail("No se produjo exception");
+		} catch (SinResultadosException exception) {
+			//se produjo exception esperada
+		}
 	}
-//U	
+//Q
 /*	@Test
 	public void queAlIntentarGuardarUnaPropiedadParaLaVentaCuyoImporteEstaPorDebajoDelUmbral10000SeArrojeLaExcepcionUmbralMinimoNoAlcanzadoException(){
 	

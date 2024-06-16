@@ -73,14 +73,14 @@ public class InterfazInmobiliaria {
 				System.out.println("\nIngrese precio maximo: ");
 				Double precioMax = teclado.nextDouble();
 				
-				inmobiliariaActual.buscarPropiedadesPorPrecio(precioMin, precioMax);
+				inmobiliariaActual.buscarPropiedadesPorPrecio(precioMin, precioMax, null);
 				break;
 				
 			case BUSCAR_PROPIEDADES_POR_UBICACION:
 				System.out.println("\nIngresar ubicacion deseada: ");
 				String ubicacion = teclado.next();
 				
-				inmobiliariaActual.buscarPropiedadesPorUbicacion(ubicacion);
+				inmobiliariaActual.buscarPropiedadesPorUbicacion(ubicacion, null);
 				break;
 				
 			case REALIZAR_VENTA:

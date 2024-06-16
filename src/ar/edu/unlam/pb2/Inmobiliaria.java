@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Scanner;
 
+import Exceptions.SinResultadosException;
+import Exceptions.UmbralMinimoNoAlcanzadoException;
+
 
 public class Inmobiliaria {
 
@@ -57,13 +60,8 @@ public class Inmobiliaria {
 	}
 
 	public Boolean agregarPropiedad(Propiedad propiedad) {
-		if (propiedades.add(propiedad)) {
-			System.out.println("SE AGREGO PROPIEDAD: " + propiedad.toString());
-			return true;
-		} else {
-			System.out.println("NO SE PUDO AGREGAR PROPIEDAD: " + propiedad.toString());
-			return false;
-		}
+		return propiedades.add(propiedad);
+		
 	}
 
 	public Boolean agregarCliente(Cliente nuevoCliente) {
@@ -281,7 +279,6 @@ public class Inmobiliaria {
 			String id = prop.getId();
 			
 			if (idPropiedad.equals(id)) {
-				System.out.println(prop.toString());
 				propiedades.remove(prop);
 				
 				switch (idPropiedad.charAt(0)) {
@@ -330,8 +327,6 @@ public class Inmobiliaria {
 	}
 
 	public void obtenerListadoPorPrecio() {
-		System.out.println("\nPROPIEDADES:\n");
-
 		ArrayList<Propiedad> propiedadesOrdenadas = getPropiedadesOrdenadasPorPrecio();
 
 		System.out.println("\nPROPIEDADES:");
@@ -388,13 +383,6 @@ public class Inmobiliaria {
 			return precioA.compareTo(precioB);
 		});
 
-		System.out.println("\nPROPIEDADES DENTRO DEL RANGO DE PRECIO: " + propEntrePrecio.size());
-
-		for (Propiedad prop : propEntrePrecio) {
-			String descripcionPropiedad = prop.toString();
-			System.out.println(descripcionPropiedad);
-		}
-		
 		return propEntrePrecio.size() > 0 ? propEntrePrecio : null;
 	}
 
@@ -404,13 +392,11 @@ public class Inmobiliaria {
 		Collections.sort(propEnUbicacion, (a, b) -> {
 			String ubicacionA = ((Propiedad) a).getCiudad();
 			String ubicacionB = ((Propiedad) b).getCiudad();
-			return ubicacionA.compareTo(ubicacionB);
-			
-		});
-		
-		System.out.println("\nPROPIEDADES DENTRO DEL RANGO DE UBICACION: " + propEnUbicacion.size());
+			return ubicacionA.compareTo(ubicacionB);		
+		});		
 		return propEnUbicacion.size() > 0 ? propEnUbicacion : null;
 	}
+	
 
 	public ArrayList<Propiedad> getCasasOrdenadasPorUbicacion() {
 		ArrayList<Propiedad> propEnUbicacion = new ArrayList<Propiedad>();
@@ -425,12 +411,10 @@ public class Inmobiliaria {
 			String ubicacionA = ((Propiedad) a).getCalle();
 			String ubicacionB = ((Propiedad) b).getCalle();
 			return ubicacionA.compareTo(ubicacionB);
-			
-		});
-		
-		System.out.println("\nCASAS DENTRO DEL RANGO DE UBICACION: " + propEnUbicacion.size());
+		});		
 		return propEnUbicacion.size() > 0 ? propEnUbicacion : null;
 	}
+	
 	
 	public ArrayList<Propiedad> buscarPropiedadesPorUbicacion(String ubicacion, TipoDePropiedad tipo) {
 		ArrayList<Propiedad> propEnUbicacion = new ArrayList<Propiedad>();
@@ -463,6 +447,7 @@ public class Inmobiliaria {
 
 		System.out.println("\nNO HAY MAS PROPIEDADES A MOSTRAR.");
 	}
+	
 
 	public Boolean realizarVenta(String propiedadAVender, Propietario propietarioCompraNuevo) {
 		for(Propiedad prop : propiedades) {
@@ -474,6 +459,7 @@ public class Inmobiliaria {
 		}			
 		return false;
 	}
+	
 
 	public Boolean realizarAlquiler(String propiedadAAlquilar, Inquilino inquilino, String fechaInicio, String fechaFin) {
 		for(Propiedad prop : propiedades) {
@@ -496,14 +482,11 @@ public class Inmobiliaria {
 					ph.setInquilino(inquilino);
 					return true;
 				}
-				
-				System.out.println("\nSE COMPLETO ALQUILER DE LA PROPIEDAD: \n" + prop.toString() + "\nINQUILINO: "
-						+ inquilino.toString() + "\n FECHA INICIO: " + fechaInicio + "\n FECHA FIN: "
-						+ fechaFin);
 			}
 		} 
 		return false;
 	}
+	
 
 	public Double valorPromedioCasas() {
 		Double sum = 0.0;
@@ -520,6 +503,7 @@ public class Inmobiliaria {
 		Double promedio = sum / cantCasas;
 		return promedio;
 	}
+	
 
 	public Double valorPromedioDepartamentos() {
 		Double sum = 0.0;
@@ -536,36 +520,36 @@ public class Inmobiliaria {
 		Double promedio = sum / cantDepartamentos;
 		return promedio;
 	}
+	
 
-	public ArrayList<Propiedad> getListadoPropiedadesEnVenta() {
-		System.out.println("\nPROPIEDADES EN VENTA:\n");
-
+	public ArrayList<Propiedad> getListadoPropiedadesEnVenta() throws SinResultadosException {
 		ArrayList<Propiedad> propEnVenta = new ArrayList<Propiedad>();
 
 		for(Propiedad prop : propiedades) {
 			if(prop.getTipo().equals(TipoDeOperacion.VENTA)){
 				propEnVenta.add(prop);
-				System.out.println(prop.toString());
 			}
 		}
-		System.out.println("NO HAY MAS PROPIEDADES A MOSTRAR.");
-		return (propEnVenta.size() == 0) ? null : propEnVenta;
+		
+		if(propEnVenta.size() == 0) { 
+			throw new SinResultadosException();
+		} else { 
+			return propEnVenta;
+		}
 	}
+	
 
 	public ArrayList<Propiedad> getListadoPropiedadesEnAlquiler() {
-		System.out.println("\nPROPIEDADES EN ALQUILER:\n");
-
 		ArrayList<Propiedad> propEnAlquiler = new ArrayList<Propiedad>();
 
 		for(Propiedad prop : propiedades) {
 			if(prop.getTipo().equals(TipoDeOperacion.ALQUILER)){
 				propEnAlquiler.add(prop);
-				System.out.println(prop.toString());
 			}
 		}
-		System.out.println("NO HAY MAS PROPIEDADES A MOSTRAR.");
 		return (propEnAlquiler.size() == 0) ? null : propEnAlquiler;
 	}
+	
 	
 	public Boolean realizarPermuta(Propietario propietarioA, Propiedad propA, Propietario propietarioB, Propiedad propB) {
 		if(propA.getTipo() == TipoDeOperacion.PERMUTA && propB.getTipo() == TipoDeOperacion.PERMUTA) {
@@ -576,6 +560,7 @@ public class Inmobiliaria {
 		}
 		return true;
 	}
+	
 	
 	public Inquilino crearInquilino() {
 		Scanner teclado = new Scanner(System.in);
