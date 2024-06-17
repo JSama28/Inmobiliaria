@@ -110,21 +110,6 @@ public class pruebaUnitariaAutomatizada {
 		inmob.agregarPropiedad(terrenitos1);
 
 		assertNotNull(inmob.buscarPropiedadesPorPrecio(50000.0, 150000.0, null));
-	}
-
-	@Test
-	public void queLaBusquedaPorRangoDePrecioDeCasasMeArrojeUnaListaNuloSiNoAplicanResultados() {
-		Casa casita1 = new Casa("ardoino", 123, "ramos", 100000.0, true, TipoDeOperacion.ALQUILER, propietario1, "C0");
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 60000.5, true, TipoDeOperacion.VENTA, propietario1, "D1");
-		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 50000.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
-		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 70000.5, true, TipoDeOperacion.ALQUILER, propietario1, "T1");
-
-		inmob.agregarPropiedad(casita1);
-		inmob.agregarPropiedad(dept1);
-		inmob.agregarPropiedad(ph1);
-		inmob.agregarPropiedad(terrenitos1);
-
-		assertNull(inmob.buscarPropiedadesPorPrecio(300000.0, 450000.0, null));
 	}	
 
 	@Test
@@ -151,31 +136,6 @@ public class pruebaUnitariaAutomatizada {
 		String ubic = inmob.getCasasOrdenadasPorUbicacion().get(0).getCiudad();
 		assertTrue("tramos" == ubic);
 	}
-
-//	@Test
-//	public void queLaBusquedaDePropiedadesPorVentaMeArrojeUnaLista() {
-//		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "C0");
-//		Casa casita2 = new Casa("monteagudo", 254, "temos", 12.5, true, TipoDeOperacion.VENTA, propietario1, "C1");
-//		Casa casita3 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "C2");
-//		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.VENTA, propietario1, "P1");
-//		Ph ph2 = new Ph("cerrito", 475, "5", "moros", 3.5, true, TipoDeOperacion.VENTA, propietario1, "P2");
-//		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.VENTA, propietario1,"D1");
-//		Departamento dept2 = new Departamento("ciri", 54, "9b", "pozos", 11.5, true, TipoDeOperacion.VENTA, propietario1,"D2");
-//		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.VENTA, propietario1, "T1");
-//		Terreno terrenitos2 = new Terreno("monroe", 824, "atres", 15.4, 4.9, true, TipoDeOperacion.VENTA, propietario1, "T2");
-//
-//		inmob.agregarPropiedad(casita1);
-//		inmob.agregarPropiedad(casita2);
-//		inmob.agregarPropiedad(casita3);
-//		inmob.agregarPropiedad(ph1);
-//		inmob.agregarPropiedad(ph2);
-//		inmob.agregarPropiedad(dept1);
-//		inmob.agregarPropiedad(dept2);
-//		inmob.agregarPropiedad(terrenitos1);
-//		inmob.agregarPropiedad(terrenitos2);
-//		
-//		assertTrue(inmob.getListadoPropiedadesEnVenta().size() > 0);
-//	}
 	
 	@Test
 	public void queSePuedaRealizarUnaPermuta() {
@@ -314,10 +274,10 @@ public class pruebaUnitariaAutomatizada {
 //P
 	@Test
 	public void queAlBuscarPorUnCriterioQueNoArrojeResultadosSeProduzcaLaExcepcionSinResultadosException(){
-		Casa casita1 = new Casa("ardoino", 123, "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "C1");
-		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 5.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
-		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 1.5, true, TipoDeOperacion.ALQUILER, propietario1,"D1");
-		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 7.5, true, TipoDeOperacion.ALQUILER, propietario1, "T1");
+		Casa casita1 = new Casa("ardoino", 123, "ramos", 50000.5, true, TipoDeOperacion.ALQUILER, propietario1, "C1");
+		Ph  ph1 = new Ph("lagos", 123, "1", "ramos", 50000.5, true, TipoDeOperacion.ALQUILER, propietario1, "P1");
+		Departamento dept1 = new Departamento("taura", 3454, "1", "lasos", 10000.5, true, TipoDeOperacion.ALQUILER, propietario1,"D1");
+		Terreno terrenitos1 = new Terreno("larrea", 1554, "zares", 5.4, 70000.5, true, TipoDeOperacion.ALQUILER, propietario1, "T1");
 
 		inmob.agregarPropiedad(casita1);
 		inmob.agregarPropiedad(ph1);
@@ -326,6 +286,20 @@ public class pruebaUnitariaAutomatizada {
 		
 		try {
 			inmob.getListadoPropiedadesEnVenta();
+			fail("No se produjo exception");
+		} catch (SinResultadosException exception) {
+			//se produjo exception esperada
+		}
+		
+		try {
+			inmob.buscarPropiedadesPorPrecio(5000.0, 9000.0, TipoDePropiedad.CASA);
+			fail("No se produjo exception");
+		} catch (SinResultadosException exception) {
+			//se produjo exception esperada
+		}
+		
+		try {
+			inmob.buscarPropiedadesPorUbicacion("zares", TipoDePropiedad.PH);
 			fail("No se produjo exception");
 		} catch (SinResultadosException exception) {
 			//se produjo exception esperada

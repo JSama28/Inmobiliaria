@@ -56,7 +56,7 @@ public class Inmobiliaria {
 		this.telefono = telefono;
 	}
 
-	public Boolean agregarPropiedad(Propiedad propiedad) throws UmbralMinimoNoAlcanzadoException {
+	public Boolean agregarPropiedad(Propiedad propiedad) {
 		if(propiedad.getTipo().equals(TipoDeOperacion.VENTA) && propiedad.getPrecio() <= 10000) {
 			throw new UmbralMinimoNoAlcanzadoException();
 		} else {
@@ -383,7 +383,11 @@ public class Inmobiliaria {
 			return precioA.compareTo(precioB);
 		});
 
-		return propEntrePrecio.size() > 0 ? propEntrePrecio : null;
+		if(propEntrePrecio.size() == 0) {
+			throw new SinResultadosException();
+		}else {
+			return propEntrePrecio;
+		}
 	}
 
 	public ArrayList<Propiedad> getPropiedadesOrdenadasPorUbicacion() {
@@ -421,18 +425,22 @@ public class Inmobiliaria {
 
 		for (Propiedad prop : propiedades) {
 			if (prop.getCiudad().contains(ubicacion) &&
-				(tipo == null || prop.getId().charAt(0) == tipo.getIdChar())) {
+					(tipo == null || prop.getId().charAt(0) == tipo.getIdChar())) {
 				propEnUbicacion.add(prop);
 			}
 		}
-		
+
 		Collections.sort(propEnUbicacion, (a, b) -> {
 			String ubicacionA = ((Propiedad) a).getCalle();
 			String ubicacionB = ((Propiedad) b).getCalle();
 			return ubicacionA.compareTo(ubicacionB);			
 		});
 
-		return propEnUbicacion;
+		if (propEnUbicacion.size() == 0) {
+			throw new SinResultadosException();
+		}else {
+			return propEnUbicacion;
+		}
 	}
 
 	public void obtenerListadoPorUbicacion() {
@@ -522,7 +530,7 @@ public class Inmobiliaria {
 	}
 	
 
-	public ArrayList<Propiedad> getListadoPropiedadesEnVenta() throws SinResultadosException {
+	public ArrayList<Propiedad> getListadoPropiedadesEnVenta() {
 		ArrayList<Propiedad> propEnVenta = new ArrayList<Propiedad>();
 
 		for(Propiedad prop : propiedades) {
@@ -539,7 +547,7 @@ public class Inmobiliaria {
 	}
 	
 
-	public ArrayList<Propiedad> getListadoPropiedadesEnAlquiler() throws SinResultadosException {
+	public ArrayList<Propiedad> getListadoPropiedadesEnAlquiler() {
 		ArrayList<Propiedad> propEnAlquiler = new ArrayList<Propiedad>();
 
 		for(Propiedad prop : propiedades) {
