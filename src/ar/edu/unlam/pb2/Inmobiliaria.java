@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Scanner;
 
-import Exceptions.SinResultadosException;
-import Exceptions.UmbralMinimoNoAlcanzadoException;
-
 
 public class Inmobiliaria {
 
@@ -59,9 +56,12 @@ public class Inmobiliaria {
 		this.telefono = telefono;
 	}
 
-	public Boolean agregarPropiedad(Propiedad propiedad) {
-		return propiedades.add(propiedad);
-		
+	public Boolean agregarPropiedad(Propiedad propiedad) throws UmbralMinimoNoAlcanzadoException {
+		if(propiedad.getTipo().equals(TipoDeOperacion.VENTA) && propiedad.getPrecio() <= 10000) {
+			throw new UmbralMinimoNoAlcanzadoException();
+		} else {
+			return propiedades.add(propiedad);
+		}
 	}
 
 	public Boolean agregarCliente(Cliente nuevoCliente) {
@@ -539,7 +539,7 @@ public class Inmobiliaria {
 	}
 	
 
-	public ArrayList<Propiedad> getListadoPropiedadesEnAlquiler() {
+	public ArrayList<Propiedad> getListadoPropiedadesEnAlquiler() throws SinResultadosException {
 		ArrayList<Propiedad> propEnAlquiler = new ArrayList<Propiedad>();
 
 		for(Propiedad prop : propiedades) {
@@ -547,7 +547,11 @@ public class Inmobiliaria {
 				propEnAlquiler.add(prop);
 			}
 		}
-		return (propEnAlquiler.size() == 0) ? null : propEnAlquiler;
+		if(propEnAlquiler.size() == 0) {
+			throw new SinResultadosException();
+		}else {
+			return propEnAlquiler;
+		}
 	}
 	
 	
