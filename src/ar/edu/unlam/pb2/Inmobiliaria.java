@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 
-public class Inmobiliaria {
+public class Inmobiliaria implements Operador {
 
 	private String nombre;
 	private String direccion;
