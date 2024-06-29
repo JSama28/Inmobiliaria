@@ -16,7 +16,7 @@ public class Inquilino extends Cliente {
 	}
 
 
-	public void setId(Propiedad propiedad) {
+	public void setPropiedad(Propiedad propiedad) {
 		this.propiedad = propiedad;
 	}
 }

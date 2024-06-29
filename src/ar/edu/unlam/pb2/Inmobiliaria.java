@@ -6,22 +6,24 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 
-public class Inmobiliaria implements Operador {
+public class Inmobiliaria {
 
 	private String nombre;
 	private String direccion;
 	private String eMail;
 	private String telefono;
-	private HashSet<Propiedad> propiedades;
+	private ArrayList<Propiedad> propiedades;
 	private HashSet<Cliente> clientes;
-
+	private ArrayList<Operador> operaciones;
+	
 	public Inmobiliaria(String nombre, String direccion, String eMail, String telefono) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.eMail = eMail;
 		this.telefono = telefono;
-		this.propiedades = new HashSet<Propiedad>();
+		this.propiedades = new ArrayList<Propiedad>();
 		this.clientes = new HashSet<Cliente>();
+		this.operaciones = new ArrayList<Operador>();
 	}
 
 	public String getNombre() {
@@ -119,7 +121,7 @@ public class Inmobiliaria implements Operador {
 
 		String idCasa = id == null ? ("C" + propiedades.size()) : id;
 
-		Casa casa = new Casa(nombreCalle, numero, ciudad, precio, true, tipo, propietario, idCasa);
+		Casa casa = new Casa(nombreCalle, numero, null, ciudad, precio, true, tipo, propietario, idCasa);
 		return casa;
 	}
 
@@ -460,8 +462,10 @@ public class Inmobiliaria implements Operador {
 	public Boolean realizarVenta(String propiedadAVender, Propietario propietarioCompraNuevo) {
 		for(Propiedad prop : propiedades) {
 			String id = prop.getId();
-			if (propiedadAVender.equals(id)) {
-				prop.setPropietario(propietarioCompraNuevo);
+			if (propiedadAVender.equals(id) && prop.getTipo() == TipoDeOperacion.VENTA) {				
+				Venta venta = new Venta(propietarioCompraNuevo, prop);
+				venta.operar();
+				this.operaciones.add(venta);
 				return true;
 			}
 		}			
@@ -473,23 +477,11 @@ public class Inmobiliaria implements Operador {
 		for(Propiedad prop : propiedades) {
 			String id = prop.getId();
 			
-			if (propiedadAAlquilar.equals(id)) {
-				switch (id.charAt(0)) {
-				case 'C':
-					Casa casa = (Casa) prop;
-					casa.setInquilino(inquilino);
-					return true;
-		
-				case 'D':
-					Departamento dept = (Departamento) prop;
-					dept.setInquilino(inquilino);
-					return true;
-					
-				case 'P':
-					Ph ph = (Ph) prop;
-					ph.setInquilino(inquilino);
-					return true;
-				}
+			if (propiedadAAlquilar.equals(id) && prop.getTipo() == TipoDeOperacion.ALQUILER) {
+				Alquiler alquiler = new Alquiler(prop, inquilino, fechaInicio, fechaFin);
+				alquiler.operar();
+				this.operaciones.add(alquiler);
+				return true;
 			}
 		} 
 		return false;
@@ -565,10 +557,10 @@ public class Inmobiliaria implements Operador {
 	
 	public Boolean realizarPermuta(Propietario propietarioA, Propiedad propA, Propietario propietarioB, Propiedad propB) {
 		if(propA.getTipo() == TipoDeOperacion.PERMUTA && propB.getTipo() == TipoDeOperacion.PERMUTA) {
-			propietarioA.agregarPropiedad(propB);
-			propietarioB.agregarPropiedad(propA);
-			propietarioA.borrarPropiedad(propA);
-			propietarioB.borrarPropiedad(propB);
+			Permuta permuta = new Permuta(propietarioA, propA, propietarioB, propB);
+			permuta.operar();
+			this.operaciones.add(permuta);
+			return true;
 		}
 		return true;
 	}

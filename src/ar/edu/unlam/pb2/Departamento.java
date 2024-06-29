@@ -3,7 +3,6 @@ package ar.edu.unlam.pb2;
 public class Departamento extends Propiedad {
 
 	private String numDep;
-	private Inquilino inquilino;
 	
 	public Departamento(String calle, Integer numero, String numDep, String ciudad, Double precio, Boolean estaDisponible,
 			TipoDeOperacion tipo, Propietario propietario, String id) {
@@ -18,14 +17,6 @@ public class Departamento extends Propiedad {
 
 	public void setNumDep(String numDep) {
 		this.numDep = numDep;
-	}
-
-	public Inquilino getInquilino() {
-		return inquilino;
-	}
-
-	public void setInquilino(Inquilino inquilino) {
-		this.inquilino = inquilino;
 	}
 	
 	@Override

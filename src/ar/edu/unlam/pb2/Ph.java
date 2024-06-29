@@ -2,8 +2,7 @@ package ar.edu.unlam.pb2;
 
 public class Ph extends Propiedad {
 
-	private String numPh;
-	private Inquilino inquilino;	
+	private String numPh;	
 		
 	public Ph(String calle, Integer numero, String numPh, String ciudad, Double precio, Boolean estaDisponible,
 			TipoDeOperacion tipo, Propietario propietario, String id) {
@@ -19,14 +18,6 @@ public class Ph extends Propiedad {
 
 	public void setNumPh(String numPh) {
 		this.numPh = numPh;
-	}
-
-	public Inquilino getInquilino() {
-		return inquilino;
-	}
-
-	public void setInquilino(Inquilino inquilino) {
-		this.inquilino = inquilino;
 	}
 	
 	@Override	

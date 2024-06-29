@@ -90,20 +90,6 @@ public class Propiedad {
 	public void setIdCasa(String id) {
 		this.id = id;
 	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(getCalle(), getNumero(), getCiudad(), getPrecio());
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		Propiedad prop = (Propiedad) obj;
-		return prop.getCalle().equals(getCalle()) && 
-				prop.getNumero().equals(getNumero()) && 
-				prop.getCiudad().equals(getCiudad()) && 
-				prop.getPrecio().equals(getPrecio());
-	}
 
 	@Override
 	public String toString() {
